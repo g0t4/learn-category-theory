@@ -19,4 +19,21 @@ doubleit x = x + x -- func defintion (name params = body)
 -- doubleit 1.0 -- fails
 
 -- see vscode code lens for inferred types
+doubleanyinferred :: Num a => a -> a
 doubleanyinferred x = x + x
+
+-- addit :: Num a => a -> a -> a
+addit a b = a + b
+
+-- impl compose (instead of . [period])
+composeit f g = f . g
+
+
+addone a = a + 1
+addtwo a = a + 2
+
+addoneThenTwo = addone . addtwo
+cOneThenTwo = composeit addone addtwo
+cTwoThenOne = composeit addtwo addone
+
+
