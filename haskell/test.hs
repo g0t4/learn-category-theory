@@ -12,6 +12,8 @@ main = putStrLn "Hello, Haskell!"
 --  doubleit 2
 --  doubleit (-1) -- put negative integer literals in parens (else IIUC appears indistinguishable from minus 1)
 
+-- :type foo -- FYI
+
 -- haskell has incredible type inference (rarely need type annotations), nonetheless a function (morphism) can specify/constrain types:
 doubleit :: Int -> Int -- limit to integer type -- type annotation
 doubleit x = x + x -- func defintion (name params = body)
@@ -39,3 +41,25 @@ cOneThenTwo = composeit addone addtwo
 cTwoThenOne = composeit addtwo addone
 
 
+-- btw Int (finite, machine specific size) != Integer (infinite)
+
+memoize :: (a -> b) -> (a -> b)
+memoize what = what
+
+addThree x = x + 3
+
+-- functions are defined by pattern matching (first pattern wins, hence if I reverse the following it is no longer quirky for `quirky 3`)
+quirky 3 = 10
+quirky x = x + 4
+
+-- Bool to Bool
+fooDefinedWithMultiline = "foo \
+\the bar"
+fooWithoutMultiline = "foo the bar"
+
+expectSame :: String -> Bool
+expectSame "foo the bar" = True
+expectSame _ = False -- anything else doesn't match
+-- comment out second pattern (of function expectSame _ ...)  and call expectSame w/ "foo" and it will Exception w/ "Non-exhaustive patterns in function expectSame"
+
+result = expectSame fooDefinedWithMultiline
