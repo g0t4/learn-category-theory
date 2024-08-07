@@ -32,7 +32,9 @@ composeit f g = f . g
 addone a = a + 1
 addtwo a = a + 2
 
+-- addoneThenTwo :: Num a => a -> a -- specify can be any num type... otherwise the type is inferred to be Integer? why? and so I cannot call this with addOneThenTwo 2.0 w/ default type inferrence
 addoneThenTwo = addone . addtwo
+
 cOneThenTwo = composeit addone addtwo
 cTwoThenOne = composeit addtwo addone
 
