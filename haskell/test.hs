@@ -12,8 +12,8 @@ main = putStrLn "Hello, Haskell!"
 --  doubleit 2
 --  doubleit (-1) -- put negative integer literals in parens (else IIUC appears indistinguishable from minus 1)
 
--- haskell has incredible type inference (rarely need to specify types), nonetheless a function (morphism) can specify/constrain types:
-doubleit :: Int -> Int -- limit to integer type
+-- haskell has incredible type inference (rarely need type annotations), nonetheless a function (morphism) can specify/constrain types:
+doubleit :: Int -> Int -- limit to integer type -- type annotation
 doubleit x = x + x -- func defintion (name params = body)
 -- doubleit 1 -- succeeds
 -- doubleit 1.0 -- fails
