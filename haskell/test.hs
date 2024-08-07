@@ -1,4 +1,5 @@
-import Data.Char (GeneralCategory(UppercaseLetter))
+import Data.Char (GeneralCategory (UppercaseLetter))
+
 -- https://www.haskell.org/ghcup/steps/
 
 -- runghc test.hs
