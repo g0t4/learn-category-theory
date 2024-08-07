@@ -121,9 +121,10 @@ parseBool ('y' : _) = True -- starts w/ y
 parseBool _ = False -- all else false
 
 
--- data
+-- data (TODO further explore)
 data Doo = Foo | Bar | Baz
 dooToInt Foo = 1
 dooToInt Bar = 2
 dooToInt Baz = 3
 
+-- n + k patterns
