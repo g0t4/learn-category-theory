@@ -4,7 +4,6 @@
 
 main = putStrLn "Hello, Haskell!"
 
-
 -- repl: ghci
 --  putStrLn "Hello, Haskell!"
 --  :load test.hs
@@ -21,7 +20,7 @@ doubleit x = x + x -- func defintion (name params = body)
 -- doubleit 1.0 -- fails
 
 -- see vscode code lens for inferred types
-doubleanyinferred :: Num a => a -> a
+doubleanyinferred :: (Num a) => a -> a
 doubleanyinferred x = x + x
 
 -- addit :: Num a => a -> a -> a
@@ -30,16 +29,16 @@ addit a b = a + b
 -- impl compose (instead of . [period])
 composeit f g = f . g
 
-
 addone a = a + 1
+
 addtwo a = a + 2
 
 -- addoneThenTwo :: Num a => a -> a -- specify can be any num type... otherwise the type is inferred to be Integer? why? and so I cannot call this with addOneThenTwo 2.0 w/ default type inferrence
 addoneThenTwo = addone . addtwo
 
 cOneThenTwo = composeit addone addtwo
-cTwoThenOne = composeit addtwo addone
 
+cTwoThenOne = composeit addtwo addone
 
 -- btw Int (finite, machine specific size) != Integer (infinite)
 
@@ -53,8 +52,10 @@ quirky 3 = 10
 quirky x = x + 4
 
 -- Bool to Bool
-fooDefinedWithMultiline = "foo \
-\the bar"
+fooDefinedWithMultiline =
+  "foo \
+  \the bar"
+
 fooWithoutMultiline = "foo the bar"
 
 expectSame :: String -> Bool
