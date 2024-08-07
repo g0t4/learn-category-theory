@@ -209,3 +209,20 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,archives,images,video,vim
 
+# Created by https://www.toptal.com/developers/gitignore/api/executable
+# Edit at https://www.toptal.com/developers/gitignore?templates=executable
+
+### Executable ###
+*.app
+*.bat
+*.cgi
+*.com
+*.exe
+*.gadget
+*.jar
+*.pif
+*.vb
+*.wsf
+
+# End of https://www.toptal.com/developers/gitignore/api/executable
+
