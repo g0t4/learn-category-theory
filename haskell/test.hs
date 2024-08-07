@@ -120,11 +120,15 @@ parseBool "n" = False -- "n" only -- note this is redundant too
 parseBool ('y' : _) = True -- starts w/ y
 parseBool _ = False -- all else false
 
-
 -- data (TODO further explore)
 data Doo = Foo | Bar | Baz
+
 dooToInt Foo = 1
 dooToInt Bar = 2
 dooToInt Baz = 3
 
+-- TODO revisit, does ghc not support n + k?
 -- n + k patterns
+-- isEven 0 = True
+-- isEven 1 = False
+-- isEven (n + 2) = isEven n -- IIUC a recursive impl of checking if a number > 1 is even... isEven 3 == isEven (n=1 + 2) -> isEven 1 -> 0
