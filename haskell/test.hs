@@ -1,3 +1,4 @@
+import Data.Char (GeneralCategory(UppercaseLetter))
 -- https://www.haskell.org/ghcup/steps/
 
 -- runghc test.hs
@@ -78,10 +79,19 @@ addFloats a b = a + b
 
 -- FYI both addInts and addFloats can be impl'd with `add` alone (w/ polymorphic func)
 
-singleDigits = [0..9] -- inclusive
-backwards = [9,8..0] -- backwards (specify first two in range and then final)
-negative = [-1,-2.. -10] -- add space before -10
-negativeToo = [-1,-2..(-10)] -- or () parens
+singleDigits = [0 .. 9] -- inclusive
+
+backwards = [9, 8 .. 0] -- backwards (specify first two in range and then final)
+
+negative = [-1, -2 .. -10] -- add space before -10
+
+negativeToo = [-1, -2 .. (-10)] -- or () parens
 -- negative == negativeToo
-alphabet = ['a'..'z']
-halves = [0,0.5..3] -- step by 0.5
+
+alphabet = ['a' .. 'z']
+
+halves = [0, 0.5 .. 3] -- step by 0.5
+
+upperAlphabet = ['A' .. 'Z']
+
+generalCategoryValues = [UppercaseLetter ..] -- IIUC i.e. GeneralCategory.UppercaseLetter
