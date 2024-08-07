@@ -96,3 +96,8 @@ halves = [0, 0.5 .. 3] -- step by 0.5
 upperAlphabet = ['A' .. 'Z']
 
 generalCategoryValues = [UppercaseLetter ..] -- IIUC i.e. GeneralCategory.UppercaseLetter
+
+square x =
+  x ^ 2
+
+power x exp = x ^ exp
