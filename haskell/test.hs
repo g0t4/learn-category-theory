@@ -109,3 +109,13 @@ square2 x =
 
 -- functions must start w/ lowercase or "_"
 _square3 = square2
+
+-- multi clause function definitions using pattern matching
+
+-- alternate type annotations:
+-- parseBool :: String -> Bool
+-- parseBool :: [Char] -> Bool
+parseBool "y" = True -- "y" only -- note this is redundant given last two rules
+parseBool "n" = False -- "n" only -- note this is redundant too
+parseBool ('y' : _) = True -- starts w/ y
+parseBool _ = False -- all else false
