@@ -132,3 +132,8 @@ dooToInt Baz = 3
 -- isEven 0 = True
 -- isEven 1 = False
 -- isEven (n + 2) = isEven n -- IIUC a recursive impl of checking if a number > 1 is even... isEven 3 == isEven (n=1 + 2) -> isEven 1 -> 0
+
+-- argument capture (in pattern match) => destructuring too
+explainString list@(f : _) = "Line is '" ++ list ++ "' and starts with '" ++ [f] ++ "'"
+
+explainString2 list@(f : _) = "Line is " ++ show list ++ " and starts with " ++ show f
