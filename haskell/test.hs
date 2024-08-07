@@ -101,3 +101,11 @@ square x =
   x ^ 2
 
 power x exp = x ^ exp
+
+square2 x =
+  let x2 =
+        x * x
+   in x2
+
+-- functions must start w/ lowercase or "_"
+_square3 = square2
