@@ -69,3 +69,19 @@ result = expectSame fooDefinedWithMultiline
 btw I found a good cheat sheet that is more of an overview:
   https://jutge.org/doc/haskell-cheat-sheet.pdf
 -}
+
+addInts :: Int -> Int -> Int -- constrain to ints only
+addInts a b = a + b
+
+addFloats :: Float -> Float -> Float
+addFloats a b = a + b
+
+-- FYI both addInts and addFloats can be impl'd with `add` alone (w/ polymorphic func)
+
+singleDigits = [0..9] -- inclusive
+backwards = [9,8..0] -- backwards (specify first two in range and then final)
+negative = [-1,-2.. -10] -- add space before -10
+negativeToo = [-1,-2..(-10)] -- or () parens
+-- negative == negativeToo
+alphabet = ['a'..'z']
+halves = [0,0.5..3] -- step by 0.5
