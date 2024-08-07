@@ -119,3 +119,11 @@ parseBool "y" = True -- "y" only -- note this is redundant given last two rules
 parseBool "n" = False -- "n" only -- note this is redundant too
 parseBool ('y' : _) = True -- starts w/ y
 parseBool _ = False -- all else false
+
+
+-- data
+data Doo = Foo | Bar | Baz
+dooToInt Foo = 1
+dooToInt Bar = 2
+dooToInt Baz = 3
+
