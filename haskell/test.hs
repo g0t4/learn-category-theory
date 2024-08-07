@@ -63,3 +63,8 @@ expectSame _ = False -- anything else doesn't match
 -- comment out second pattern (of function expectSame _ ...)  and call expectSame w/ "foo" and it will Exception w/ "Non-exhaustive patterns in function expectSame"
 
 result = expectSame fooDefinedWithMultiline
+
+{-
+btw I found a good cheat sheet that is more of an overview:
+  https://jutge.org/doc/haskell-cheat-sheet.pdf
+-}
