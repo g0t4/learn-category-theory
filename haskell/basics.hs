@@ -151,4 +151,13 @@ lastName = snd personJean
 areSame = personJean == (firstName, lastName)
 
 -- anonymous/lambda funcs
+-- https://wiki.haskell.org/Anonymous_function
 anonTest = foldl (\x y -> x + y) 0 [1 .. 3]
+
+
+adder = (+)
+addOne = adder 1 -- partial application (applied)
+twoPlusOne = addOne 2 -- fully applied (saturated) args
+
+halve = (/2) -- infix / => apply second arg o_RDONLY
+halfOfTen = halve 10
