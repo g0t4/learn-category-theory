@@ -161,3 +161,6 @@ twoPlusOne = addOne 2 -- fully applied (saturated) args
 
 halve = (/2) -- infix / => apply second arg o_RDONLY
 halfOfTen = halve 10
+
+myAdd a b = a + b
+infixMyAddResult = 2 `myAdd` 3
