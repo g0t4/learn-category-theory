@@ -179,3 +179,6 @@ myDivide a b = a / b
 myHalver = (`myDivide` 2)
 
 myTenHalved = myHalver 10
+
+flipHalve = flip myDivide 2
+flippedTenHalved = flipHalve 10
