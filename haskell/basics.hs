@@ -139,3 +139,11 @@ explainString list@(f : _) = "Line is '" ++ list ++ "' and starts with '" ++ [f]
 explainString2 list@(f : _) = "Line is " ++ show list ++ " and starts with " ++ show f
 
 -- PRN Void (empty) set, () unit (single element set), Bool (two element set)
+
+personJon = ("Jon", "Doe", 45)
+personJean = ("Jean", "Doe")
+firstName = fst personJean
+lastName = snd personJean
+areSame = personJean == (firstName, lastName)
+
+
