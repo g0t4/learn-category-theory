@@ -18,5 +18,8 @@ instance MyMonoid Int where
 testMyMonoidInteger :: Int
 testMyMonoidInteger = m_append 1 2
 
+-- infix operator => two arg function (surround w/ parens)
 concats = (++)
 -- foo = concats "foo" "bar"
+combined = (++) "foo" "bar"
+combined2 = "foo" ++ "bar"
