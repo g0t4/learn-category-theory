@@ -180,5 +180,12 @@ myHalver = (`myDivide` 2)
 
 myTenHalved = myHalver 10
 
+-- or use flip func to lock second arg
 flipHalve = flip myDivide 2
+flippedTenHalved :: Double
 flippedTenHalved = flipHalve 10
+
+-- my own myFlipper
+myFlipper f a b = f b a
+myFlipperHalve = myFlipper (/) 2 -- partially apply func and 2nd arg (b) but leave (a) free
+myFlipperTenHalved = myFlipperHalve 10
