@@ -154,13 +154,28 @@ areSame = personJean == (firstName, lastName)
 -- https://wiki.haskell.org/Anonymous_function
 anonTest = foldl (\x y -> x + y) 0 [1 .. 3]
 
-
 adder = (+)
+
 addOne = adder 1 -- partial application (applied)
+
 twoPlusOne = addOne 2 -- fully applied (saturated) args
 
-halve = (/2) -- infix / => apply second arg o_RDONLY
+halve = (/ 2) -- infix / => apply second arg o_RDONLY
+
 halfOfTen = halve 10
 
 myAdd a b = a + b
+
 infixMyAddResult = 2 `myAdd` 3
+
+-- use infix style to lock (partially apply) 2nd arg
+myAddOne = (`myAdd` 1) -- lock in right
+
+myAddTwoToOne = myAddOne 2
+
+-- makes more sense to lock in denominator:
+myDivide a b = a / b
+
+myHalver = (`myDivide` 2)
+
+myTenHalved = myHalver 10
