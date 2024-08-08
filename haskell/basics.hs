@@ -186,6 +186,7 @@ flippedTenHalved :: Double
 flippedTenHalved = flipHalve 10
 
 -- my own myFlipper
-myFlipper f a b = f b a
-myFlipperHalve = myFlipper (/) 2 -- partially apply func and 2nd arg (b) but leave (a) free
+myTwoArgFlipper f a b = f b a
+myFlipperHalve :: Double -> Double
+myFlipperHalve = myTwoArgFlipper (/) 2 -- partially apply func and 2nd arg (b) but leave (a) free
 myFlipperTenHalved = myFlipperHalve 10
