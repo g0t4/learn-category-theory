@@ -375,8 +375,9 @@ testGuards = do
         | num < 10 = "small"
         | num < 100 = "medium"
         | num < 1000 = "large"
-        | otherwise = "YUUUGE"
-
+        | otherwise = "YUUUGE" -- FYI otherwise is True, for readability!
+        --  | True = "YUGE" -- alternative to using otherwise
   print $ "4 is " ++ getSize 4
   print $ "10 is " ++ getSize 10
   print $ "1001 is " ++ getSize 1001
+  print otherwise -- True, for readability
