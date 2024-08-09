@@ -12,6 +12,7 @@ main = do
   putStrLn ""
 
   let multiplied = Foo.multit 2 2
+  -- $ = function application operator (very low precedence) == apply function (to left) to the right hand side (which will be evaluated due to precedence, before $ is applied) = TLDR sometimes can get rid of parens that would otherwise be needed to dictate order of operations
   putStrLn $ "2 * 2 = " ++ show multiplied
   putStrLn $ "2 * 2 = " ++ Prelude.show multiplied
   putStrLn $ "2 * 2 = " <> show multiplied -- <> more general than ++ IIUC
