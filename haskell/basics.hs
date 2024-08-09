@@ -288,3 +288,7 @@ foo' = do
   let f = "foo"
   let b = "bar"
   f ++ b
+
+foo'' =
+  let f = "foo"
+   in f ++ f
