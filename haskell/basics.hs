@@ -182,11 +182,27 @@ myTenHalved = myHalver 10
 
 -- or use flip func to lock second arg
 flipHalve = flip myDivide 2
+
 flippedTenHalved :: Double
 flippedTenHalved = flipHalve 10
 
 -- my own myFlipper
 myTwoArgFlipper f a b = f b a
+
 myFlipperHalve :: Double -> Double
 myFlipperHalve = myTwoArgFlipper (/) 2 -- partially apply func and 2nd arg (b) but leave (a) free
+
 myFlipperTenHalved = myFlipperHalve 10
+
+-- $ function application operator (think implicit parenthesis)
+-- foo $ bar 1 == foo(bar 1)
+
+timesTwo = (* 2)
+
+plusOne = (+ 1)
+
+-- resultTwoPlusOneOnOne = timesTwo . plusOne 1 -- invalid
+resultTwoPlusOneOnOne = (timesTwo . plusOne) 1 -- use parens to compose funcs b4 apply to 1
+
+resultTwoPlusOneOnOne' = timesTwo . plusOne $ 1 -- use $ to specify that left hand side is a func (timesTwo . plusOne) that is applied to right hand side (1)
+-- FYI ' (single quote) is often used for assignment (to a new variable) instead of using the same variable which is invalid
