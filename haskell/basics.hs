@@ -290,5 +290,6 @@ foo' = do
   f ++ b
 
 foo'' =
-  let f = "foo"; b = "bar"
+  let f = "foo"
+      b = "bar"
    in f ++ b
