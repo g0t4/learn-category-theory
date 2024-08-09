@@ -313,3 +313,9 @@ foo'5 =
             b = "bar"
          in f ++ b
    in result
+
+-- where is same as let, just comes at end of func... for readability's sake (sometimes let makes sense, other times where)
+foo'6 = f ++ b
+  where
+    f = "foo"
+    b = "bar"
