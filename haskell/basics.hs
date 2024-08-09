@@ -382,3 +382,16 @@ testGuards = do
   print $ "10 is " ++ getSize 10
   print $ "1001 is " ++ getSize 1001
   print otherwise -- True, for readability
+  --
+  let getSize' num
+        | num < 10 =
+            displayIs "small" -- each clause has a function body, hence the = sign on each... so we can use let/in/where etc
+        | num < 100 = displayIs "medium"
+        | num < 1000 = displayIs "large"
+        | otherwise = displayIs "YUUUGE" -- FYI otherwise is True, for readability!
+        where
+          displayIs size = show (num) ++ " is " ++ size
+  --  | True = "YUGE" -- alternative to using otherwise
+  print $ getSize' 4
+  print $ getSize' 10
+  print $ getSize' 1001
