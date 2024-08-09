@@ -13,3 +13,11 @@ main = do
   let combined = foldl (\a b -> a ++ " " ++ b) "" fors -- extra leading " "
   print combined
 
+test2 = do
+  let fizzBuzz upTo
+        | upTo > 1 = fizzBuzz (upTo - 1) ++ " " ++ fizzBuzzFor (upTo)
+        | upTo == 1 = fizzBuzzFor (upTo)
+        | otherwise = ""
+
+  let result = fizzBuzz 10
+  print result
