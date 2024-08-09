@@ -391,7 +391,11 @@ testGuards = do
         | otherwise = displayIs "YUUUGE" -- FYI otherwise is True, for readability!
         where
           displayIs size = show (num) ++ " is " ++ size
-  --  | True = "YUGE" -- alternative to using otherwise
+  --  FYI print ~= putStrLn . print
   print $ getSize' 4
   print $ getSize' 10
   print $ getSize' 1001
+
+testLoopz = do
+  -- TODO left off here
+  print "foo"
