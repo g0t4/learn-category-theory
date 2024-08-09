@@ -326,3 +326,11 @@ foo'7 =
    in f ++ b
   where
     b = "bar"
+
+-- let can use where bindings, but not the other way around
+foo'8 =
+  let result = f ++ b
+   in result
+  where
+    f = "foo8"
+    b = "bar"
