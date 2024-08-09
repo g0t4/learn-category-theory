@@ -293,3 +293,9 @@ foo'' =
   let f = "foo"
       b = "bar"
    in f ++ b
+
+foo''' =
+  let result = f ++ b
+      f = "foo"
+      b = "bar"
+   in result
