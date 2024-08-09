@@ -215,3 +215,8 @@ testTitler = do
   let higbeeTitler' = flip titler "Higbee" -- first remains unbound (unapplied)
   print $ higbeeTitler "Wes"
   print $ higbeeTitler' "Jane"
+
+testPrecedence = do
+  let result = "2 shows as: " <> show 2
+  let result' = "2 shows as: " <> (show 2) -- unnecessary parens b/c function application has higher binding precedence vs operator application
+  print result
