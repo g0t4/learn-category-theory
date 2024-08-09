@@ -228,11 +228,31 @@ testPrecedence = do
 
 infixl 6 <+> -- set lower precendence (same as + that we are mimicking), also this sets it lower than division (7), so when we use + and / together then we get expected order of operations:
 -- FYI cannot mix infixl and infixr operators of same precedence in the same expression w/o parenthesis b/c its ambiguous if left-to-right or right-to-left order of operations is used
-testOrderOfOperations :: IO ()
+
 testOrderOfOperations = do
   -- FYI -- :info / => infixl 7 /
   print $ 1 <++> 2 / 6
   print $ 1 <+> 2 / 6
+
+  -- FYI functions and custom operators all default to bind precendence of 9 (highest, makes sense, they're all basically funcs and s/b applied first)
+
+  print $ "1 divide 2 divide 3"
+  print "foo"
+
+-- fixity applies to any infix func usage, so:
+divide = (/)
+
+infixl 4 `divide` -- drop lower than (infix 6 +)
+-- :info /  => infixl 7 /
+
+testFixityOnDivide = do
+  print $ "1 + 2 / 3 = " ++ show (1 + 2 / 3) -- => 2/3 + 1 => 1.666
+  print $ "1 + 2 `divide` 3 = " ++ show (1 + 2 `divide` 3) -- 1+2 = 3 `divide` 3 => 1
+
+  -- function fixity only applies in infix form, NOT in prefix form:
+  print $ "1 + 2 / 3 = " ++ show (1 + divide 2 3) -- 1.666
+  -- IIUC operator fixity is also only applicable in infix form, i.e.:
+  print $ "(+) 1 2 / 3 = " ++ show ((+) 1 2 / 3) -- use (+) in prefix form, now `1 + 2` is evaluated before `/ 3` => hence 1.0 here
 
 testCustomOperator = do
   let a = 1; b = 2
