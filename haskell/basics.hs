@@ -305,3 +305,11 @@ foo'4 =
       b = "bar"
       result x = show x ++ f ++ b -- bind funcs too
    in result 4
+
+-- nested let blocks
+foo'5 =
+  let result =
+        let f = "foo"
+            b = "bar"
+         in f ++ b
+   in result
