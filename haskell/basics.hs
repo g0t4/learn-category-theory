@@ -206,3 +206,12 @@ resultTwoPlusOneOnOne = (timesTwo . plusOne) 1 -- use parens to compose funcs b4
 
 resultTwoPlusOneOnOne' = timesTwo . plusOne $ 1 -- use $ to specify that left hand side is a func (timesTwo . plusOne) that is applied to right hand side (1)
 -- FYI ' (single quote) is often used for assignment (to a new variable) instead of using the same variable which is invalid
+
+testTitler = do
+  let titler first last = last <> ", " <> first -- wow type is correctly inferred here, I love it!
+  let fullName = titler "Wes" "Higbee"
+  let fullName' = "Wes" `titler` "Higbee" -- terrible readability using infix here :)
+  let higbeeTitler = (`titler` "Higbee")
+  let higbeeTitler' = flip titler "Higbee" -- first remains unbound (unapplied)
+  print $ higbeeTitler "Wes"
+  print $ higbeeTitler' "Jane"
