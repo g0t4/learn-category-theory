@@ -1,4 +1,4 @@
-import Data.List (intercalate)
+import Data.List (intercalate, intersperse)
 
 remainder = rem
 
@@ -16,6 +16,10 @@ main = do
   print combined
   let combined2 = intercalate " " fors -- no extra leading " "
   print combined2
+  let forsWithSeparators = intersperse " " fors
+  print forsWithSeparators
+  let joined = concat forsWithSeparators
+  print $ "joined:  " ++ joined
 
 test2 = do
   let fizzBuzz upTo
