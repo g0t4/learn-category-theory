@@ -10,5 +10,6 @@ main = do
   let numbers = [1 .. 15]
   let fors = map fizzBuzzFor numbers
   print fors
-  let combined = foldl (++) "" fors
+  let combined = foldl (\a b -> a ++ " " ++ b) "" fors -- extra leading " "
   print combined
+
