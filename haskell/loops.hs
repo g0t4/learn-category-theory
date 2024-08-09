@@ -1,3 +1,4 @@
+import Data.Char
 import Data.List (intercalate, intersperse)
 
 remainder = rem
@@ -42,3 +43,10 @@ testWithRecursive = do
 
   let result = fizzBuzz 10
   print result
+
+asideTrim = do
+  -- prompted to trim by example in haskell book leaving undesired trailing spaces, or above in my foldl when I have undesired leading " " (would need trimStart)
+  let trimEnd = reverse . dropWhile isSpace . reverse
+  print $ trimEnd " foo "
+  let trimStart = dropWhile isSpace
+  print $ trimStart " bar "
