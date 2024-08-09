@@ -50,3 +50,13 @@ asideTrim = do
   print $ trimEnd " foo "
   let trimStart = dropWhile isSpace
   print $ trimStart " bar "
+
+fibonacci n
+  | n == 0 = 0 -- base case
+  | n == 1 = 1 -- base case too
+  | otherwise = fibonacci (n - 1) + fibonacci (n - 2)
+
+printFibonacciSequence = do
+  let fibTo10 = map fibonacci [0 .. 10]
+  print fibTo10
+  print $ fibTo10 == [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
