@@ -25,7 +25,13 @@ testWithLists = do
   print $ "joined:  " ++ joined
 
 testWithListsSimplified = do
+  -- definitely concise, but IMO somewhat difficult to read
   let result = intercalate " " (map fizzBuzzFor [1 .. 15])
+  print result
+
+testInfixMap = do
+  let myMap = flip map
+  let result = intercalate " " ([1 .. 15] `myMap` fizzBuzzFor)
   print result
 
 testWithRecursive = do
