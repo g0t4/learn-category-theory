@@ -24,7 +24,9 @@ testWithLists = do
   let joined = concat forsWithSeparators
   print $ "joined:  " ++ joined
 
-
+testWithListsSimplified = do
+  let result = intercalate " " (map fizzBuzzFor [1 .. 15])
+  print result
 
 testWithRecursive = do
   let fizzBuzz upTo
