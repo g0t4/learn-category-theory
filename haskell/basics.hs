@@ -278,3 +278,7 @@ testCustomOperator = do
 
   -- TLDR can use infix or prefix form when DEFINING functions and operators, AND infix or prefix when USING them
   print "done"
+
+-- can wrap definition across lines
+foo =
+  "bar"
