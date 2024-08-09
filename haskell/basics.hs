@@ -221,16 +221,28 @@ testPrecedence = do
   let result' = "2 shows as: " <> (show 2) -- unnecessary parens b/c function application has higher binding precedence vs operator application
   print result
 
+(<++>) a b = a + b -- bind prec = 9 (default for custom operators)
+
+(<+>) a b = a + b -- prefix form (operator definition)
+-- :info <+> -- in ghci, get operator info (i.e. bind precedence) => 9 default precedence (highest)
+
+infixl 6 <+> -- set lower precendence (same as + that we are mimicking), also this sets it lower than division (7), so when we use + and / together then we get expected order of operations:
+
+testOrderOfOperations = do
+  -- FYI -- :info / => infixl 7 /
+  print $ 1 <++> 2 / 6
+  print $ 1 <+> 2 / 6
+
 testCustomOperator = do
   let a = 1; b = 2
   print $ show $ a + b
   print (show (a + b)) -- FYI effective parens due to usage of $ previously
   -- custom op:
-  let (<+>) a b = a + b -- prefix form (operator definition)
   print $ show $ a <+> b
   print (show (a <+> b))
   let a +++ b = a + b -- infix form (operator definition)
   print $ show $ a +++ b
+
   -- FYI operators must be symbols only (no alphanumeric chars)
 
   -- aside - so, I can use infix func definition with a regular function too!
