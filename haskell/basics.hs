@@ -318,6 +318,9 @@ foo'5 =
    in result
 
 -- where is same as let, just comes at end of func... for readability's sake (sometimes let makes sense, other times where)
+
+-- *** where doesn't require let/in
+
 foo'6 = f ++ b
   where
     f = "foo"
@@ -337,3 +340,12 @@ foo'8 =
   where
     f = "foo8"
     b = "bar"
+
+-- nested where blocks
+foo'9 =
+  result
+  where
+    result = f ++ b
+      where
+        f = "foo9"
+        b = "bar"
