@@ -319,3 +319,10 @@ foo'6 = f ++ b
   where
     f = "foo"
     b = "bar"
+
+-- mix-n-match let/where:
+foo'7 =
+  let f = "foofoo"
+   in f ++ b
+  where
+    b = "bar"
