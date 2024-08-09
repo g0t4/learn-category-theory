@@ -14,8 +14,11 @@ main = do
   print fors
   let combined = foldl (\a b -> a ++ " " ++ b) "" fors -- extra leading " "
   print combined
+
+  -- intercalate definition: https://github.com/g0t4/learn-category-theory/blob/f3ab0cb21f108449fc7edf28c1290ba70b2795b6/haskell/loops.hs#L17
   let combined2 = intercalate " " fors -- no extra leading " "
   print combined2
+
   let forsWithSeparators = intersperse " " fors
   print forsWithSeparators
   let joined = concat forsWithSeparators
