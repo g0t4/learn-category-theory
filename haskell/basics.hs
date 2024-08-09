@@ -349,3 +349,13 @@ foo'9 =
       where
         f = "foo9"
         b = "bar"
+
+testIfExpressions :: IO ()
+testIfExpressions = do
+  let isEven n =
+        if n `mod` 2 == 0
+          then True
+          else False
+
+  print $ "isEven 2 => " ++ show (isEven 2)
+  print $ "isEven 3 => " ++ show (isEven 3)
