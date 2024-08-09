@@ -1,3 +1,5 @@
+import Data.List (intercalate)
+
 remainder = rem
 
 fizzBuzzFor num
@@ -12,6 +14,8 @@ main = do
   print fors
   let combined = foldl (\a b -> a ++ " " ++ b) "" fors -- extra leading " "
   print combined
+  let combined2 = intercalate " " fors -- no extra leading " "
+  print combined2
 
 test2 = do
   let fizzBuzz upTo
