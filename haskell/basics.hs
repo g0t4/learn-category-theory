@@ -359,3 +359,10 @@ testIfExpressions = do
   let isEven' n = n `mod` 2 == 0 -- simplified
   print $ "isEven 2 => " ++ show (isEven' 2)
   print $ "isEven 3 => " ++ show (isEven' 3)
+
+  let is n =
+        if n `mod` 2 == 0
+          then "Even"
+          else "Odd"
+  print $ "2 is " ++ is 2
+  print $ "3 is " ++ is 3
