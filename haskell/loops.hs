@@ -8,7 +8,7 @@ fizzBuzzFor num
   | num `remainder` 3 == 0 = "fizz"
   | otherwise = show num
 
-main = do
+testWithLists = do
   let numbers = [1 .. 15]
   let fors = map fizzBuzzFor numbers
   print fors
@@ -24,7 +24,9 @@ main = do
   let joined = concat forsWithSeparators
   print $ "joined:  " ++ joined
 
-test2 = do
+
+
+testWithRecursive = do
   let fizzBuzz upTo
         | upTo > 1 = fizzBuzz (upTo - 1) ++ " " ++ fizzBuzzFor (upTo)
         | upTo == 1 = fizzBuzzFor (upTo)
