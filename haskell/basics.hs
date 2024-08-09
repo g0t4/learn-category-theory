@@ -282,3 +282,9 @@ testCustomOperator = do
 -- can wrap definition across lines
 foo =
   "bar"
+
+-- use do and let to build up an expresion with intermediate variables
+foo' = do
+  let f = "foo"
+  let b = "bar"
+  f ++ b
