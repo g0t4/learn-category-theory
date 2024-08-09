@@ -299,3 +299,9 @@ foo''' =
       f = "foo"
       b = "bar"
    in result
+
+foo'4 =
+  let f = "foo"
+      b = "bar"
+      result x = show x ++ f ++ b -- bind funcs too
+   in result 4
