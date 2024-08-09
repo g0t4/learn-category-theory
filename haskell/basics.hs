@@ -356,6 +356,6 @@ testIfExpressions = do
         if n `mod` 2 == 0
           then True
           else False
-
-  print $ "isEven 2 => " ++ show (isEven 2)
-  print $ "isEven 3 => " ++ show (isEven 3)
+  let isEven' n = n `mod` 2 == 0 -- simplified
+  print $ "isEven 2 => " ++ show (isEven' 2)
+  print $ "isEven 3 => " ++ show (isEven' 3)
