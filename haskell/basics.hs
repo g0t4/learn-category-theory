@@ -283,12 +283,15 @@ testCustomOperator = do
 foo =
   "bar"
 
--- use do and let to build up an expresion with intermediate variables
+-- I made this up, not sure implications but it works:
+--  use do and let to build up an expresion with intermediate variables
 foo' = do
   let f = "foo"
   let b = "bar"
   f ++ b
 
+-- FYI observation => variables == parameter less functions (zero params)... everything is a function!
+--   IOTW => can use let/in/where with any function (zero+ params)
 foo'' =
   let f = "foo"
       b = "bar"
