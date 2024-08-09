@@ -366,3 +366,17 @@ testIfExpressions = do
           else "Odd"
   print $ "2 is " ++ is 2
   print $ "3 is " ++ is 3
+
+testGuards = do
+  -- FYI no elseif IIUC, instead use guard (seems similar to case)
+  -- NOTE no = after `getSize num`
+  -- FYI MAKE SURE indent guard clauses after start of function name `getSize`
+  let getSize num
+        | num < 10 = "small"
+        | num < 100 = "medium"
+        | num < 1000 = "large"
+        | otherwise = "YUUUGE"
+
+  print $ "4 is " ++ getSize 4
+  print $ "10 is " ++ getSize 10
+  print $ "1001 is " ++ getSize 1001
