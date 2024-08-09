@@ -372,7 +372,8 @@ testGuards = do
   -- NOTE no = after `getSize num`
   -- FYI MAKE SURE indent guard clauses after start of function name `getSize`
   let getSize num
-        | num < 10 = "small"
+        | num < 10 =
+            "small" -- each clause has a function body, hence the = sign on each... so we can use let/in/where etc
         | num < 100 = "medium"
         | num < 1000 = "large"
         | otherwise = "YUUUGE" -- FYI otherwise is True, for readability!
