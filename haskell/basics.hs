@@ -227,7 +227,8 @@ testPrecedence = do
 -- :info <+> -- in ghci, get operator info (i.e. bind precedence) => 9 default precedence (highest)
 
 infixl 6 <+> -- set lower precendence (same as + that we are mimicking), also this sets it lower than division (7), so when we use + and / together then we get expected order of operations:
-
+-- FYI cannot mix infixl and infixr operators of same precedence in the same expression w/o parenthesis b/c its ambiguous if left-to-right or right-to-left order of operations is used
+testOrderOfOperations :: IO ()
 testOrderOfOperations = do
   -- FYI -- :info / => infixl 7 /
   print $ 1 <++> 2 / 6
