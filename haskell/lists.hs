@@ -118,6 +118,13 @@ testListComprehensions = do
 
 myZip [] [] = []
 myZip (head1 : rest1) (head2 : rest2) = (head1, head2) : myZip rest1 rest2
+myZip list1 [] = []
+myZip [] list2 = []
 
 testZip = do
   print $ myZip [1, 2, 3] ["a", "b", "c"]
+
+  -- edge cases (not same # items in each list... make my zip take until one list is exhausted)
+  print $ myZip [1, 2, 3] ["a", "b"]
+
+  print $ myZip [1, 2] ["a", "b", "c"]
