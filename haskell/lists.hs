@@ -119,8 +119,8 @@ testListComprehensions = do
 myZip [] [] = []
 myZip (head1 : rest1) (head2 : rest2) = (head1, head2) : myZip rest1 rest2
 -- add two more impls of myZip for edge cases, otherwise it would be a "partial function" with only the two patterns above
-myZip _list [] = []
-myZip [] _list = []
+myZip _list1 [] = []
+myZip [] _list2 = []
 
 -- myZip is now a "total function"
 
@@ -134,8 +134,8 @@ testZip = do
 
 -- myZip2 use pattern matching (destructuring) in let binding
 myZip2 [] [] = []
-myZip2 _list [] = []
-myZip2 [] _list = []
+myZip2 _list1 [] = []
+myZip2 [] _list2 = []
 myZip2 list1 list2 =
   let (head1 : rest1) = list1
       (head2 : rest2) = list2
