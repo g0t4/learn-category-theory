@@ -13,3 +13,5 @@ myCycle list =
     myCycle' [] = myCycle' list -- restart when done with each cycle
     myCycle' (head : rest) =
       head : myCycle' rest
+
+-- FYI `myCycle [0..1] !! 4` == 4 `mod` 2
