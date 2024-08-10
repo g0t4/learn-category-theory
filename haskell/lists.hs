@@ -44,3 +44,7 @@ sumRecursive1 (head : rest) = head + sumRecursive1 (rest)
 myFoldL :: (a -> a -> a) -> a -> [a] -> a
 myFoldL project accumulated [] = accumulated
 myFoldL project accumulated (head : rest) = myFoldL project (project accumulated head) rest
+
+summer = myFoldL (+) 0
+
+-- summer' list = myFoldL (+) 0 list -- explicit list arg
