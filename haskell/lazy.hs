@@ -15,3 +15,7 @@ myCycle list =
       head : myCycle' rest
 
 -- FYI `myCycle [0..1] !! 4` == 4 `mod` 2
+
+-- much more succinct!
+myCycle2 [] = []
+myCycle2 list = list <> myCycle2 list
