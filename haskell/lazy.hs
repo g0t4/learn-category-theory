@@ -5,3 +5,11 @@ positiveIntegers =
 
 testLazyEvaluate = do
   print $ positiveIntegers !! 4 -- only need to evaluate first 4 elements of list and thus infinite list is not created
+
+myCycle [] = []
+myCycle (head : rest) =
+  head : remainder rest
+  where
+    remainder [] = myCycle (head : rest)
+    remainder (headn : restn) =
+      headn : remainder restn
