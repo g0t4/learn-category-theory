@@ -131,3 +131,20 @@ testZip = do
   print $ myZip [1, 2, 3] ["a", "b"]
 
   print $ myZip [1, 2] ["a", "b", "c"]
+
+-- myZip2 use pattern matching (destructuring) in let binding
+myZip2 [] [] = []
+myZip2 list1 [] = []
+myZip2 [] list2 = []
+myZip2 list1 list2 =
+  let (head1 : rest1) = list1
+      (head2 : rest2) = list2
+   in (head1, head2) : (myZip2 rest1 rest2)
+
+testZip2 = do
+  print $ myZip2 [1, 2, 3] ["a", "b", "c"]
+
+  -- edge cases (not same # items in each list... make my zip take until one list is exhausted)
+  print $ myZip2 [1, 2, 3] ["a", "b"]
+
+  print $ myZip2 [1, 2] ["a", "b", "c"]
