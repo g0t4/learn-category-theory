@@ -41,7 +41,7 @@ sumRecursive1 :: (Num t) => [t] -> t
 sumRecursive1 [] = 0
 sumRecursive1 (head : rest) = head + sumRecursive1 (rest)
 
-myFoldL :: (a -> a -> a) -> a -> [a] -> a
+myFoldL :: (t1 -> t2 -> t1) -> t1 -> [t2] -> t1
 myFoldL project accumulated [] = accumulated
 myFoldL project accumulated (head : rest) = myFoldL project (project accumulated head) rest
 
