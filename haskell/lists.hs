@@ -12,3 +12,5 @@ testCons = do
   let cons = (:)
   print $ cons 1 [2, 3]
   print $ 1 `cons` [2, 3]
+
+  print $ 'f' : 'o' : 'o' : "bar"
