@@ -123,6 +123,7 @@ myZip _list1 [] = []
 myZip [] _list2 = []
 
 -- myZip is now a "total function"
+-- FYI `ghci -Wincomplete-patterns` to see non-exhaustive pattern warnings
 
 testZip = do
   print $ myZip [1, 2, 3] ["a", "b", "c"]
