@@ -81,10 +81,11 @@ myFilter predicate (head : rest)
   | predicate (head) = head : myFilter predicate rest
   | otherwise = myFilter predicate rest
 
-testMyFilter = do
-  let isEven num = num `rem` 2 == 0
-  let isOdd num = isEven num == False
+isEven num = num `rem` 2 == 0
 
+isOdd num = isEven num == False
+
+testMyFilter = do
   let numbers = [1, 2, 3, 4]
   print $ myFilter isEven numbers
   print $ myFilter isOdd numbers
@@ -100,3 +101,14 @@ testMyFilter = do
   let sumIf predicate = summer . myFilter predicate
   putStrLn $ "sum of evens: " <> show (sumIf isEven numbers)
   putStrLn $ "sum of odds: " <> show (sumIf isOdd numbers)
+
+testListComprehensions = do
+  -- similar to python's list comprehensions (for readability IIAC)
+  let numbers = [1, 2, 3]
+  print [num * 2 | num <- numbers]
+  print $ map (* 2) numbers -- vs using map
+
+  -- filter too:
+  print [num * 2 | num <- numbers, num `rem` 2 == 0] -- IMO neither this nor map/filter are superior in terms of readability...
+  print $ map (* 2) (filter isEven numbers) -- vs using map + filter
+  --  I prefer a c# like variation => numbers.Filter(isEven).Map(n => n * 2)
