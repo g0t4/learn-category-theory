@@ -148,3 +148,15 @@ testZip2 = do
   print $ myZip2 [1, 2, 3] ["a", "b"]
 
   print $ myZip2 [1, 2] ["a", "b", "c"]
+
+-- case statements
+
+getNth n =
+  case n of
+    1 -> "1st"
+    2 -> "2nd"
+    3 -> "3rd"
+    n -> show (n) <> "th"
+
+testGetNth = do
+  [getNth (n) | n <- [1 .. 8]]
