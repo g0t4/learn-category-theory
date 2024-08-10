@@ -42,7 +42,7 @@ sumRecursive1 [] = 0
 sumRecursive1 (head : rest) = head + sumRecursive1 (rest)
 
 myFoldL :: (t1 -> t2 -> t1) -> t1 -> [t2] -> t1
-myFoldL project accumulated [] = accumulated
+myFoldL project accumulated [] = accumulated -- base case
 myFoldL project accumulated (head : rest) = myFoldL project (project accumulated head) rest
 
 summer = myFoldL (+) 0
@@ -53,3 +53,10 @@ summer = myFoldL (+) 0
 --   this is why accum and list type don't have to match
 countChars :: [String] -> Int
 countChars = myFoldL (\accum head -> accum + length (head)) 0
+
+myFoldR :: (t2 -> t1 -> t1) -> t1 -> [t2] -> t1
+myFoldR project accumulated [] = accumulated -- base case
+myFoldR project accumulated list =
+  let reversed = reverse list
+      newAccumulated = project (head reversed) accumulated
+   in myFoldR project newAccumulated (reverse (tail reversed))
