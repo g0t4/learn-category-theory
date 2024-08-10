@@ -124,6 +124,7 @@ myZip [] _list2 = []
 
 -- myZip is now a "total function"
 -- FYI `ghci -Wincomplete-patterns` to see non-exhaustive pattern warnings
+--   or `:set -​Wno​-incomplete-patterns` when ghci already running
 
 testZip = do
   print $ myZip [1, 2, 3] ["a", "b", "c"]
