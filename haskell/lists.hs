@@ -29,12 +29,13 @@ countDown n
 
 countTo = reverse . countDown
 
-sumRecursive nums =
-  sumRecursive' nums
-  where
-    sumRecursive' nums
-      | nums == [] = 0
-      | otherwise = head (nums) + sumRecursive' (tail (nums))
+-- -- head/tail warnings, commented out this:
+-- sumRecursive nums =
+--   sumRecursive' nums
+--   where
+--     sumRecursive' nums
+--       | nums == [] = 0
+--       | otherwise = head (nums) + sumRecursive' (tail (nums))
 
 sumRecursive1 :: (Num a) => [a] -> a
 sumRecursive1 [] = 0
