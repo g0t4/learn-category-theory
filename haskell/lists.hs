@@ -18,7 +18,13 @@ testCons = do
   -- aside, using <> to prepend
   print $ [1] <> [2, 3]
 
-testHeadTails = do
-  let numbers = 1 : 2 : [3]
-  print $ "head: " <> show (head numbers)
-  print $ "tail: " <> show (tail numbers)
+-- testHeadTails = do
+--   let numbers = 1 : 2 : [3]
+--   print $ "head: " <> show (head numbers)
+--   print $ "tail: " <> show (tail numbers)
+
+countDown n
+  | n == 0 = []
+  | otherwise = n : countDown (n - 1)
+
+countTo = reverse . countDown
