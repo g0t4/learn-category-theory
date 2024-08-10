@@ -14,3 +14,11 @@ testCons = do
   print $ 1 `cons` [2, 3]
 
   print $ 'f' : 'o' : 'o' : "bar"
+
+  -- aside, using <> to prepend
+  print $ [1] <> [2, 3]
+
+testHeadTails = do
+  let numbers = 1 : 2 : [3]
+  print $ "head: " <> show (head numbers)
+  print $ "tail: " <> show (tail numbers)
