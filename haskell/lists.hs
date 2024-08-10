@@ -115,3 +115,9 @@ testListComprehensions = do
 
   -- multi list (i.e. create permutations in tuples)
   print [(a, b) | a <- [100, 110, 120], b <- [1, 2]]
+
+myZip [] [] = []
+myZip (head1 : rest1) (head2 : rest2) = (head1, head2) : myZip rest1 rest2
+
+testZip = do
+  print $ myZip [1, 2, 3] ["a", "b", "c"]
