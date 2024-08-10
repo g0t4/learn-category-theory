@@ -85,5 +85,18 @@ testMyFilter = do
   let isEven num = num `rem` 2 == 0
   let isOdd num = isEven num == False
 
-  print $ myFilter isEven [1, 2, 3, 4]
-  print $ myFilter isOdd [1, 2, 3, 4]
+  let numbers = [1, 2, 3, 4]
+  print $ myFilter isEven numbers
+  print $ myFilter isOdd numbers
+
+  putStrLn $ "sum of evens: " <> show (summer (myFilter isEven numbers))
+  putStrLn $ "sum of odds: " <> show (summer (myFilter isOdd numbers))
+
+  let sumIfEven = summer . myFilter isEven
+  let sumIfOdd = summer . myFilter isOdd
+  putStrLn $ "sum of evens: " <> show (sumIfEven numbers)
+  putStrLn $ "sum of odds: " <> show (sumIfOdd numbers)
+
+  let sumIf predicate = summer . myFilter predicate
+  putStrLn $ "sum of evens: " <> show (sumIf isEven numbers)
+  putStrLn $ "sum of odds: " <> show (sumIf isOdd numbers)
