@@ -118,8 +118,11 @@ testListComprehensions = do
 
 myZip [] [] = []
 myZip (head1 : rest1) (head2 : rest2) = (head1, head2) : myZip rest1 rest2
+-- add two more impls of myZip for edge cases, otherwise it would be a "partial function" with only the two patterns above
 myZip list1 [] = []
 myZip [] list2 = []
+
+-- myZip is now a "total function"
 
 testZip = do
   print $ myZip [1, 2, 3] ["a", "b", "c"]
