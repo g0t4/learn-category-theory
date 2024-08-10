@@ -28,3 +28,10 @@ countDown n
   | otherwise = n : countDown (n - 1)
 
 countTo = reverse . countDown
+
+sumRecursive nums =
+  sumRecursive' nums
+  where
+    sumRecursive' nums
+      | nums == [] = 0
+      | otherwise = head (nums) + sumRecursive' (tail (nums))
