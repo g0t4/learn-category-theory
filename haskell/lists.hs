@@ -75,3 +75,15 @@ myMap project (first : rest) = project (first) : myMap project rest
 -- myMap (*2) [1,2,3] == [2,4,6]
 -- myMap (/2) [1,2,3] == [0.5,1.0,1.5]
 -- myMap (2/) [1,2,3] == [2.0,1.0,0.6666666666666666]
+
+myFilter predicate [] = []
+myFilter predicate (head : rest)
+  | predicate (head) = head : myFilter predicate rest
+  | otherwise = myFilter predicate rest
+
+testMyFilter = do
+  let isEven num = num `rem` 2 == 0
+  let isOdd num = isEven num == False
+
+  print $ myFilter isEven [1, 2, 3, 4]
+  print $ myFilter isOdd [1, 2, 3, 4]
