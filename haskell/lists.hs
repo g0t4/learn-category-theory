@@ -41,7 +41,7 @@ sumRecursive1 :: (Num t) => [t] -> t
 sumRecursive1 [] = 0
 sumRecursive1 (head : rest) = head + sumRecursive1 (rest)
 
-myFoldL :: (t1 -> t2 -> t1) -> t1 -> [t2] -> t1
+myFoldL :: (a -> t -> a) -> a -> [t] -> a -- note func(accum/a, head/t)
 myFoldL project accumulated [] = accumulated -- base case
 myFoldL project accumulated (head : rest) = myFoldL project (project accumulated head) rest
 
@@ -54,9 +54,13 @@ summer = myFoldL (+) 0
 countChars :: [String] -> Int
 countChars = myFoldL (\accum head -> accum + length (head)) 0
 
-myFoldR :: (t2 -> t1 -> t1) -> t1 -> [t2] -> t1
+-- kinda interesting that foldr doesn't flip list and accumulated params too to convey that foldr's project args are flipped (unless I made a mistake in my IMPL)
+myFoldR :: (t -> a -> a) -> a -> [t] -> a -- note func(head/t, accumulated/a)
 myFoldR project accumulated [] = accumulated -- base case
 myFoldR project accumulated list =
   let reversed = reverse list
       newAccumulated = project (head reversed) accumulated
    in myFoldR project newAccumulated (reverse (tail reversed))
+
+-- myFoldR (<>) "-" ["1","2","3"] == "123-"
+-- myFoldL (<>) "-" ["1","2","3"] == "-123"
