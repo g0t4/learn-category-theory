@@ -67,3 +67,11 @@ myFoldR project accumulated (head : rest) =
 
 -- myFoldR (<>) "-" ["1","2","3"] == "123-"
 -- myFoldL (<>) "-" ["1","2","3"] == "-123"
+
+myMap :: (t -> p) -> [t] -> [p]
+myMap project [] = []
+myMap project (first : rest) = project (first) : myMap project rest
+
+-- myMap (*2) [1,2,3] == [2,4,6]
+-- myMap (/2) [1,2,3] == [0.5,1.0,1.5]
+-- myMap (2/) [1,2,3] == [2.0,1.0,0.6666666666666666]
