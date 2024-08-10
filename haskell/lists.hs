@@ -57,10 +57,13 @@ countChars = myFoldL (\accum head -> accum + length (head)) 0
 -- kinda interesting that foldr doesn't flip list and accumulated params too to convey that foldr's project args are flipped (unless I made a mistake in my IMPL)
 myFoldR :: (t -> a -> a) -> a -> [t] -> a -- note func(head/t, accumulated/a)
 myFoldR project accumulated [] = accumulated -- base case
-myFoldR project accumulated list =
-  let reversed = reverse list
-      newAccumulated = project (head reversed) accumulated
-   in myFoldR project newAccumulated (reverse (tail reversed))
+-- myFoldR project accumulated list =
+--   let reversed = reverse list
+--       newAccumulated = project (head reversed) accumulated
+--    in myFoldR project newAccumulated (reverse (tail reversed))
+myFoldR project accumulated (head : rest) =
+  -- essentially this is the last call to project with final item (head) and accumulated value from rest(tail) of list
+  project (head) (myFoldR project accumulated (rest)) -- re-impl w/o reversing list... much easier to read!
 
 -- myFoldR (<>) "-" ["1","2","3"] == "123-"
 -- myFoldL (<>) "-" ["1","2","3"] == "-123"
