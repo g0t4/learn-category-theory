@@ -112,3 +112,6 @@ testListComprehensions = do
   print [num * 2 | num <- numbers, num `rem` 2 == 0] -- IMO neither this nor map/filter are superior in terms of readability...
   print $ map (* 2) (filter isEven numbers) -- vs using map + filter
   --  I prefer a c# like variation => numbers.Filter(isEven).Map(n => n * 2)
+
+  -- multi list (i.e. create permutations in tuples)
+  print [(a, b) | a <- [100, 110, 120], b <- [1, 2]]
