@@ -35,3 +35,7 @@ sumRecursive nums =
     sumRecursive' nums
       | nums == [] = 0
       | otherwise = head (nums) + sumRecursive' (tail (nums))
+
+sumRecursive1 :: (Num a) => [a] -> a
+sumRecursive1 [] = 0
+sumRecursive1 (head : rest) = head + sumRecursive1 (rest)
