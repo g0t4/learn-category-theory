@@ -48,3 +48,8 @@ myFoldL project accumulated (head : rest) = myFoldL project (project accumulated
 summer = myFoldL (+) 0
 
 -- summer' list = myFoldL (+) 0 list -- explicit list arg
+
+-- countChars ["foo","the","b"] == 7
+--   this is why accum and list type don't have to match
+countChars :: [String] -> Int
+countChars = myFoldL (\accum head -> accum + length (head)) 0
