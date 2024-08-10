@@ -7,9 +7,9 @@ testLazyEvaluate = do
   print $ positiveIntegers !! 4 -- only need to evaluate first 4 elements of list and thus infinite list is not created
 
 myCycle [] = []
-myCycle (head : rest) =
-  head : remainder rest
+myCycle list =
+  myCycle' list
   where
-    remainder [] = myCycle (head : rest)
-    remainder (headn : restn) =
-      headn : remainder restn
+    myCycle' [] = myCycle' list -- restart when done with each cycle
+    myCycle' (head : rest) =
+      head : myCycle' rest
