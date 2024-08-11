@@ -231,7 +231,11 @@ Semigroup is a parent/super class of Monoid:
   IOTW to impl Monoid you also have to impl Semigroup
 -}
 
-newtype MyMaybe a = MyMaybe (Maybe a) deriving (Show)
+-- newtype MyMaybe a = MyMaybe (Maybe a) deriving (Show)
+newtype MyMaybe a = MyMaybe (Maybe a)
+
+instance (Show a) => Show (MyMaybe a) where
+  show (MyMaybe a) = "mymabezs: " <> show a
 
 instance Semigroup (MyMaybe a) where
   (MyMaybe Nothing) <> b = b
