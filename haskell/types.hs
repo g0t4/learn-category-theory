@@ -40,11 +40,11 @@ foo a b = a + b
 
 -- test1 = foo 1 _
 
-data MyPerson = MyPerson String String
+data MyPerson = MyPerson String String Int
 
-showPerson (MyPerson first last) =
+showPerson (MyPerson first last _) =
   print $ last <> ", " <> first
 
 testPerson = do
-  let wes = MyPerson "wes" "higbee"
+  let wes = MyPerson "wes" "higbee" 100
   showPerson wes
