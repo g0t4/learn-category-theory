@@ -26,3 +26,10 @@ testIdentity = do
   print $ myIdentity (1 :: Float) -- shows 1.0
   print $ myIdentity "foo"
   print $ myIdentity [1, 2, 3]
+
+-- use undefined as placeholder to get type checking working w/o impl in this case
+myFoo :: Int -> Int
+myFoo x = undefined
+
+testMyFoo = do
+  myFoo 1
