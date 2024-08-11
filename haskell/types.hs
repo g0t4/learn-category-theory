@@ -87,5 +87,12 @@ testFactory = do
   print $ showPerson2b $ personConstructor "wes" "higbee"
 
 data Turn = Left | Right
-data LightBulb = On | Off
+
+data Power = On | Off
+
 data SimpleColor = Red | Yellow | Orange | Green | Blue | Purple
+
+-- see calc.hs for an example of sum types
+
+-- FYI sum types / type sets (union set)
+data LightFeature = LightPower Power | LightColor SimpleColor
