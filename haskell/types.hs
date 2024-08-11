@@ -5,11 +5,11 @@ age = 1 :: Int
 age2 :: Int
 age2 = 2
 
-addInt = (+) :: Int -> Int -> Int
-
-addFloat = (+) :: Float -> Float -> Float
+addInt = (+) :: Int -> Int -> Int -- monomorphic
 
 testAdds = do
   print $ addInt 2 2
   print $ addFloat 2 2
   print $ addFloat 2.0 2.1
+
+addFloat = (+) :: Float -> Float -> Float -- monomorphic (morphism)
