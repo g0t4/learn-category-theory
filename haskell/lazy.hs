@@ -36,7 +36,7 @@ findFirst predicate =
 -- b/c of how findFirst is defined, it can stop at the first matching element that satisifes the predicate and thus due to lazy eval we stop at that point and can foldr across an infinite list (b/c if we are contingent only on current item and don't express the accumulated value as a combination of subsequent items too then we can stop at the current item that satisifes a given predicate... interesting)...
 -- IF HOWEVER I Used my REVERSE impl of myFoldR then findFirst wouldn't work for an infinite list...
 
--- THAT SAID GOOD GOD WHY USE foldr to find the first item in a list!
+-- THAT SAID GOOD GOD WHY USE foldr to find the first item in a list! ... makes me wonder why the author even brought up foldr with this scenario other than an obscure example of lazy eval... yuck... the following is lazy eval for the same reason and is 1,000,000,000% easier to grok:
 
 myFindFirst predicate (head : rest)
   | predicate head = [head]
