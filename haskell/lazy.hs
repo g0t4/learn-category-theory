@@ -50,11 +50,11 @@ testMyFindFirst = do
   print $ myFindFirst (> 50) [1 ..]
 
 fibSequence =
-  fibs' [0, 1]
+  0 : 1 : fibs' 1 0
   where
-    fibs' all@(p1 : p2 : _) =
+    fibs' p2 p1 =
       let next = p1 + p2
-       in next : fibs' (next : all)
+       in next : fibs' next p2
 
 testFibSequence = do
   print $ takeWhile (< 100) fibSequence
