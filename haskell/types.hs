@@ -1,4 +1,6 @@
 -- combine type annotation/signature with the expression (= 1)
+{-# LANGUAGE RecordWildCards #-}
+
 age = 1 :: Int
 
 -- split type annotation/signature from expression
@@ -56,8 +58,8 @@ data MyPerson2 = MyPerson2
     theAge :: Int
   }
 
-showPerson2 (MyPerson2 firstName lastName age) =
-  lastName <> ", " <> firstName <> " " <> show (age)
+showPerson2 (MyPerson2 firstName lastName theAge) =
+  lastName <> ", " <> firstName <> " " <> show (theAge)
 
 testPerson2 = do
   let wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
@@ -68,3 +70,11 @@ testPerson2 = do
   let resetAge person = person {theAge = 70}
   print $ "reset age: "
   print $ "  " <> showPerson2 (resetAge (wes2))
+
+showPerson2b MyPerson2 {..} =
+  -- think automatically destructure all fields into local variables
+  firstName <> " " <> lastName <> " " <> show (theAge)
+
+testPerson2b = do
+  let wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
+  print $ showPerson2b wes2
