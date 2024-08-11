@@ -1,3 +1,5 @@
+import System.Console.Haskeline (getInputLine)
+
 -- credit: from Effective Haskell book
 -- https://learning.oreilly.com/library/view/effective-haskell/9798888650400/f_0045.xhtml#d24e21490
 
@@ -17,3 +19,6 @@ testIt = do
   print $ eval (Lit 1)
   print $ eval (Add (Lit 2) (Lit 3))
   print $ eval (Add (Add (Lit 2) (Lit 2)) (Lit 3))
+
+  input <- getLine
+  print input
