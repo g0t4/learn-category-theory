@@ -122,8 +122,7 @@ velocity meters seconds = meters / seconds
 instance Show MyPerson2 where
   show person = "fucker " ++ firstName person
 
--- friggin cool... once defined, the compiler can infer to use this when you call show wes2!!
-
 testShowInstance = do
+  -- friggin cool... once defined, the compiler can infer to use this when you call show wes2!!
   putStrLn $ show wes2
   print wes2 -- print calls show
