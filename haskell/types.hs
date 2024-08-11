@@ -126,3 +126,11 @@ testShowInstance = do
   -- friggin cool... once defined, the compiler can infer to use this when you call show wes2!!
   putStrLn $ show wes2
   print wes2 -- print calls show
+
+-- FYI browsing ghc/ghc repo, search for "instance\s+show" is a great way to learn about many of the types avail, i.e. then take smth like Float.hs and peruse it specifically (search for "instance\s" and read each):
+-- https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Float.hs#L569-L570
+-- type classes are like mixins that can be defined independent of a traditional class! I love it.. think duck typing + type inference 
+-- btw here is a fundamental type `Double` and it's definition (IIUC): https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-prim/GHC/Types.hs#L530-L531
+--   => from here look at other fundamental types
+--   *** Frustrated that F12 doesn't work in vscode extension :( to jump from type usage (i.e. `instance Num Double<CURSOR>` => `data Double`)
+--      here is `Num` type class that I've noticed in type signatures/annotations... ok so that was a constraint based on there being an instance class for a given type?!
