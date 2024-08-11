@@ -37,4 +37,14 @@ testMyFoo = do
 -- type holes (FYI vscode haskell extension shows inferred types in code lens -- far superior to using type holes w/ ghc/ghci to show type info inferred)
 -- THAT said type holes might be helpful to explore when there is a mismatch (will show relevant bindings and valid hole fits in current code)
 foo a b = a + b
+
 -- test1 = foo 1 _
+
+data MyPerson = MyPerson String String
+
+showPerson (MyPerson first last) =
+  print $ last <> ", " <> first
+
+testPerson = do
+  let wes = MyPerson "wes" "higbee"
+  showPerson wes
