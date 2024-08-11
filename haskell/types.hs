@@ -267,3 +267,6 @@ testMySum = do
   -- need to derive semigroup to get <>
   let concat = MySum 20 <> MySum 10
   print $ concat
+
+  let empty = mempty :: MySum
+  putStrLn $ "empty is: " <> show (empty)
