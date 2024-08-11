@@ -47,3 +47,4 @@ testMyFindFirst = do
   print $ myFindFirst (> 5) [1, 3 .. 10]
   print $ myFindFirst (> 9) [1, 3 .. 10]
   print $ myFindFirst (> 100) positiveIntegers
+  print $ myFindFirst (> 50) [1..]
