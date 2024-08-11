@@ -52,6 +52,6 @@ testMyFindFirst = do
 fibSequence =
   fibs' [0, 1]
   where
-    fibs' (p1 : p2 : rest) =
+    fibs' all@(p1 : p2 : _) =
       let next = p1 + p2
-       in next : fibs' (next : p1 : p2 : rest)
+       in next : fibs' (next : all)
