@@ -71,9 +71,9 @@ parseBinary exprConstructor args =
           Right $ (exprConstructor firstArg secondArg, rest'')
 
 run :: String -> String
-run expr =
-  case parse expr of
+run user_input =
+  case parse user_input of
     Left err -> "Error: " <> err
-    Right expr' ->
-      let answer = show $ eval expr'
+    Right expr ->
+      let answer = show $ eval expr
        in "The answer is: " <> answer
