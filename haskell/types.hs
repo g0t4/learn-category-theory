@@ -251,3 +251,10 @@ testMyMaybe = do
   putStrLn $ show smth
   print nothing
   print smth
+
+newtype MySum = MySum {getMySum :: Int}
+  deriving (Eq, Show) -- borrow Show from record fields
+
+testMySum = do
+  print $ MySum 20
+  print $ MySum {getMySum = 10}
