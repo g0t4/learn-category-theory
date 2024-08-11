@@ -155,9 +155,19 @@ firstOrDefault :: forall a. [a] -> Maybe a
 firstOrDefault [] = Nothing
 firstOrDefault (head : rest) = Just head
 
+emptyTo = firstOrDefault ([] :: [Int])
+
 testMaybe = do
   let numbers = [1 .. 10]
 
   print $ dropWhile (< 11) numbers
   print $ firstOrDefault $ dropWhile (< 11) numbers
-  print $ firstOrDefault ([] :: [Int])
+
+firstOrFailure :: [a] -> Either String a
+firstOrFailure [] = Prelude.Left "Cannot get first item in an empty list"
+firstOrFailure (head : rest) = Prelude.Right head
+
+testEither = do
+  print $ firstOrFailure ([] :: [Int])
+  print $ firstOrFailure [1, 2, 3]
+  print $ firstOrFailure "foo"
