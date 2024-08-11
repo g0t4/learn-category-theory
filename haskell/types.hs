@@ -85,3 +85,7 @@ personConstructor firstName lastName =
 
 testFactory = do
   print $ showPerson2b $ personConstructor "wes" "higbee"
+
+data Turn = Left | Right
+data LightBulb = On | Off
+data SimpleColor = Red | Yellow | Orange | Green | Blue | Purple
