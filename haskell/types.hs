@@ -258,7 +258,7 @@ testMyMaybe = do
 
 newtype MySum = MySum {getMySum :: Int}
   deriving (Eq, Show) -- base Show on record fields' show
-  deriving (Semigroup) via (Sum Int) -- borrow Semigroup instance from `Sum Int`, see: https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Data/Semigroup/Internal.hs#L270-L273
+  deriving (Semigroup, Monoid) via (Sum Int) -- borrow Semigroup instance from `Sum Int`, see: https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Data/Semigroup/Internal.hs#L270-L273
 
 testMySum = do
   print $ MySum 20
