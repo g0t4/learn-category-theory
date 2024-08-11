@@ -171,3 +171,57 @@ testEither = do
   print $ firstOrFailure ([] :: [Int])
   print $ firstOrFailure [1, 2, 3]
   print $ firstOrFailure "foo"
+
+{-
+
+:kind Maybe
+Maybe :: * -> *
+-- reads (Maybe is a type constructor that take a single type parameter and returns a single type)
+
+:kind Maybe Int
+Maybe Int :: *
+-- Maybe Int is a concrete type (IIUC), * == concrete type (not a type constructor, right?)
+
+:kind Maybe [Int]
+Maybe [Int] :: *
+-- Again, Maybe [Int] is a concrete type (no unbound type params)
+
+:kind Maybe []
+-- fails b/c:
+
+:set -XDataKinds -- use :kind with data constructors, i.e.:
+:kind Nothing
+Nothing :: Maybe a
+--
+:kind (Nothing :: Maybe Int)
+(Nothing :: Maybe Int) :: Maybe Int
+
+:kind Just
+Just :: a -> Maybe a
+--
+:kind Just Int
+Just Int :: Maybe (*)
+-- b/c `:kind Int` == `Int :: *`
+
+-- Types optionally take Type Parameters
+-- kind * == Fully Saturated Types (IIUC all Type Params, if any, specified/bound)
+-- **Type Constructor** == Non-fully Saturated Types (b/c by specifying a Type Parameter you are constructing a new Type)
+
+-- definitions
+:type foldl
+foldl :: Foldable t => (b -> a -> b) -> b -> t a -> b
+-- `type signature/annotation` is returned by `:type` command
+-- `a` and `b` are type variables/parameters
+-- `Foldable t` is a type class constraint
+-- `t a` => IIUC (see below) => creates a Constraint, think t(a) => concrete type where t is a type constructor that supports Foldable type class (think "interface")
+   otherwise is we had `[a]` instead of `t a` then we could only use foldl on lists (and not Maybe and all other types that support Foldable)
+
+:kind Foldable
+Foldable :: (* -> *) -> Constraint
+-- a Constraint constructor?
+--
+:kind Foldatble t
+Foldable :: t -> Constraint
+-- thus `Foldable t` is a constraint that says `t` must be a type constructor that takes a concrete type (*) and returns a new concrete type (*) so t = (* -> *) ... i.e. a List, Maybe, etc
+
+-}
