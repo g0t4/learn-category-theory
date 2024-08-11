@@ -135,3 +135,4 @@ testShowInstance = do
 --   *** Frustrated that F12 doesn't work in vscode extension :( to jump from type usage (i.e. `instance Num Double<CURSOR>` => `data Double`)
 --      here is `Num` type class that I've noticed in type signatures/annotations... ok so that was a constraint based on there being an instance class for a given type?!
 -- btw here is `instance Eq Double`... https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-prim/GHC/Classes.hs#L336-L338
+-- `class Semigroup`! https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Base.hs#L566-L567
