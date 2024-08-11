@@ -33,3 +33,8 @@ myFoo x = undefined
 
 testMyFoo = do
   myFoo 1
+
+-- type holes (FYI vscode haskell extension shows inferred types in code lens -- far superior to using type holes w/ ghc/ghci to show type info inferred)
+foo a b = a + b
+
+-- test1 = foo 1 _
