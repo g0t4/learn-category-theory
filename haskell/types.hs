@@ -96,3 +96,14 @@ data SimpleColor = Red | Yellow | Orange | Green | Blue | Purple
 
 -- FYI sum types / type sets (union set)
 data LightFeature = LightPower Power | LightColor SimpleColor
+
+-- *** type aliases:
+
+type Meters = Double
+
+type Seconds = Double
+
+type MetersPerSecond = Double
+
+velocity :: Meters -> Seconds -> MetersPerSecond
+velocity meters seconds = meters / seconds
