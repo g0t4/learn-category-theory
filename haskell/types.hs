@@ -120,4 +120,4 @@ velocity meters seconds = meters / seconds
 --          -- Defined in ‘GHC.Internal.Show’
 
 instance Show MyPerson2 where
-  show person = "fucker" ++ firstName person
+  show person = "fucker " ++ firstName person
