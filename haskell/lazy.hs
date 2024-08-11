@@ -55,3 +55,6 @@ fibSequence =
     fibs' all@(p1 : p2 : _) =
       let next = p1 + p2
        in next : fibs' (next : all)
+
+testFibSequence = do
+  print $ takeWhile (< 100) fibSequence
