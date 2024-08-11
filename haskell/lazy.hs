@@ -49,14 +49,13 @@ testMyFindFirst = do
   print $ myFindFirst (> 100) positiveIntegers
   print $ myFindFirst (> 50) [1 ..]
 
-fibSequence =
-  fibs' [0, 1]
+fibSequenceReversed =
+  fibs' [1, 0]
   where
     fibs' list =
       if length (list) > 10
         then list
         else
-          let len = length (list)
-              p1 = list !! (len - 1)
-              p2 = list !! (len - 2)
-           in fibs' (list <> [p1 + p2])
+          let p1 = list !! 0
+              p2 = list !! 1
+           in fibs' ((p1 + p2) : list)
