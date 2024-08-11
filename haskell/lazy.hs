@@ -50,7 +50,7 @@ testMyFindFirst = do
   print $ myFindFirst (> 50) [1 ..]
 
 fibSequence =
-  0 : 1 : fibs' 1 0
+  0 : 1 : fibs' 1 0 -- list grows from left to right and each iteration accordingly is effectively appended! even though I am using cons with prepends to list! fascinating
   where
     fibs' p2 p1 =
       let next = p1 + p2
