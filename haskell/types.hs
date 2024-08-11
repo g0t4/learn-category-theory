@@ -25,3 +25,4 @@ testIdentity = do
   print $ myIdentity 1 -- shows 1
   print $ myIdentity (1 :: Float) -- shows 1.0
   print $ myIdentity "foo"
+  print $ myIdentity [1, 2, 3]
