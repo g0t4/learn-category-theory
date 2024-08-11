@@ -13,3 +13,15 @@ testAdds = do
   print $ addFloat 2.0 2.1
 
 addFloat = (+) :: Float -> Float -> Float -- monomorphic (morphism)
+
+-- polymorphic (parametric)
+myIdentity :: a -> a
+myIdentity x = x
+
+-- FYI funcs w/ params need sep line for type signature =>
+--    myIdentity x = x :: a -> a -- INVALID
+
+testIdentity = do
+  print $ myIdentity 1 -- shows 1
+  print $ myIdentity (1 :: Float) -- shows 1.0
+  print $ myIdentity "foo"
