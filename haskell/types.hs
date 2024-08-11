@@ -222,6 +222,28 @@ Foldable :: (* -> *) -> Constraint
 --
 :kind Foldatble t
 Foldable :: t -> Constraint
--- thus `Foldable t` is a constraint that says `t` must be a type constructor that takes a concrete type (*) and returns a new concrete type (*) so t = (* -> *) ... i.e. a List, Maybe, etc
+-- thus `Foldable t` is a constraint that says `t` must be a type constructor that takes a concrete type (*) and returns a new concrete type (*) so t = (* -> *) ... i.e. `t` can be [], Maybe, etc
+--   and when `t a` such that `t` is `[]` and `a` is `Int` then `t a` becomes `[Int]`
 
+-- *** Semigroup/Monoid
+Semigroup is a parent/super class of Monoid:
+  https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Base.hs#L673
+  IOTW to impl Monoid you also have to impl Semigroup
 -}
+
+newtype MyMaybe a = MyMaybe (Maybe a) deriving (Show)
+
+instance Semigroup (MyMaybe a) where
+  (MyMaybe Nothing) <> b = b
+  a <> _ = a
+
+instance Monoid (MyMaybe a) where
+  mempty = MyMaybe Nothing
+
+testMyMaybe = do
+  let nothing = MyMaybe Nothing :: MyMaybe Int
+  let smth = MyMaybe (Just 1)
+  putStrLn $ show nothing
+  putStrLn $ show smth
+  print nothing
+  print smth
