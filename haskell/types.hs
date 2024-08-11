@@ -78,3 +78,10 @@ showPerson2b MyPerson2 {..} =
 testPerson2b = do
   let wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
   print $ showPerson2b wes2
+
+personConstructor firstName lastName =
+  let theAge = 1
+   in MyPerson2 {..}
+
+testFactory = do
+  print $ showPerson2b $ personConstructor "wes" "higbee"
