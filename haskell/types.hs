@@ -1,5 +1,9 @@
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DerivingVia #-}
 -- combine type annotation/signature with the expression (= 1)
 {-# LANGUAGE RecordWildCards #-}
+
+import Data.Semigroup
 
 age = 1 :: Int
 
@@ -253,8 +257,13 @@ testMyMaybe = do
   print smth
 
 newtype MySum = MySum {getMySum :: Int}
-  deriving (Eq, Show) -- borrow Show from record fields
+  deriving (Eq, Show) -- base Show on record fields' show
+  deriving (Semigroup) via (Sum Int) -- borrow Semigroup instance from `Sum Int`, see: https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Data/Semigroup/Internal.hs#L270-L273
 
 testMySum = do
   print $ MySum 20
   print $ MySum {getMySum = 10}
+
+  -- need to derive semigroup to get <>
+  let concat = MySum 20 <> MySum 10
+  print $ concat
