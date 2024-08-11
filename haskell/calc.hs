@@ -20,10 +20,6 @@ eval expr =
     Mul a b -> eval (a) * eval (b)
     Div a b -> eval (a) `div` eval (b)
 
--- toExpr :: String -> Expr
--- toExpr token
---   | "+"
-
 parseInput :: String -> [Expr]
 parseInput "" = []
 parseInput line =
