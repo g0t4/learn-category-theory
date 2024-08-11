@@ -75,8 +75,9 @@ showPerson2b MyPerson2 {..} =
   -- think automatically destructure all fields into local variables
   firstName <> " " <> lastName <> " " <> show (theAge)
 
+wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
+
 testPerson2b = do
-  let wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
   print $ showPerson2b wes2
 
 personConstructor firstName lastName =
@@ -107,3 +108,16 @@ type MetersPerSecond = Double
 
 velocity :: Meters -> Seconds -> MetersPerSecond
 velocity meters seconds = meters / seconds
+
+-- *** type classes and SHOW?
+
+-- :info show
+--      type Show :: * -> Constraint
+--      class Show a where
+--        ...
+--        show :: a -> String
+--        ...
+--          -- Defined in ‘GHC.Internal.Show’
+
+instance Show MyPerson2 where
+  show person = "fucker" ++ firstName person
