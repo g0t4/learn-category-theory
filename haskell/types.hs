@@ -43,8 +43,28 @@ foo a b = a + b
 data MyPerson = MyPerson String String Int
 
 showPerson (MyPerson first last _) =
-  print $ last <> ", " <> first
+  last <> ", " <> first
 
 testPerson = do
   let wes = MyPerson "wes" "higbee" 100
-  showPerson wes
+  print $ showPerson wes
+
+-- record syntax
+data MyPerson2 = MyPerson2
+  { firstName :: String,
+    lastName :: String,
+    theAge :: Int
+  }
+
+showPerson2 (MyPerson2 firstName lastName age) =
+  lastName <> ", " <> firstName <> " " <> show (age)
+
+testPerson2 = do
+  let wes2 = MyPerson2 {firstName = "Wes", lastName = "Higbee", theAge = 80}
+  print $ showPerson2 wes2
+  print $ firstName wes2 -- auto field func
+  print $ lastName wes2 -- auto field func
+  --
+  let resetAge person = person {theAge = 70}
+  print $ "reset age: "
+  print $ "  " <> showPerson2 (resetAge (wes2))
