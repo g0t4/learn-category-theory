@@ -122,6 +122,10 @@ velocity meters seconds = meters / seconds
 instance Show MyPerson2 where
   show person = "fooer " ++ firstName person
 
+-- FYI use
+--   :info MyPerson2 => shows:   instance Show MyPerson2 -- Defined at types.hs:122:10
+--   :instances MyPerson2
+
 testShowInstance = do
   -- friggin cool... once defined, the compiler can infer to use this when you call show wes2!!
   putStrLn $ show wes2
@@ -129,10 +133,31 @@ testShowInstance = do
 
 -- FYI browsing ghc/ghc repo, search for "instance\s+show" is a great way to learn about many of the types avail, i.e. then take smth like Float.hs and peruse it specifically (search for "instance\s" and read each):
 -- https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Float.hs#L569-L570
--- type classes are like mixins that can be defined independent of a traditional class! I love it.. think duck typing + type inference 
+-- type classes are like mixins that can be defined independent of a traditional class! I love it.. think duck typing + type inference
 -- btw here is a fundamental type `Double` and it's definition (IIUC): https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-prim/GHC/Types.hs#L530-L531
 --   => from here look at other fundamental types
 --   *** Frustrated that F12 doesn't work in vscode extension :( to jump from type usage (i.e. `instance Num Double<CURSOR>` => `data Double`)
 --      here is `Num` type class that I've noticed in type signatures/annotations... ok so that was a constraint based on there being an instance class for a given type?!
 -- btw here is `instance Eq Double`... https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-prim/GHC/Classes.hs#L336-L338
 -- `class Semigroup`! https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Base.hs#L566-L567
+
+-- kind is the type of a type
+-- :kind Int
+-- Int :: *
+-- :kind Maybe
+--
+--    FYI data Maybe => https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Maybe.hs#L29-L30
+-- :set -XDataKinds  -- enable `:kind [DataType]` such as `:kind Nothing` or `:kind Just`
+--     :unset -XDataKinds
+-- :instances Maybe
+
+firstOrDefault :: forall a. [a] -> Maybe a
+firstOrDefault [] = Nothing
+firstOrDefault (head : rest) = Just head
+
+testMaybe = do
+  let numbers = [1 .. 10]
+
+  print $ dropWhile (< 11) numbers
+  print $ firstOrDefault $ dropWhile (< 11) numbers
+  print $ firstOrDefault ([] :: [Int])
