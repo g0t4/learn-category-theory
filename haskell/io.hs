@@ -159,6 +159,8 @@ makeFilePrefixStyleSplitLines =
         (>>=)
           (return (home <> "/.foo"))
           ( \path ->
-              (>>) (writeFile (home <> "/.foo") "make") (appendFile (home <> "/.foo") "FilePrefixStyleSplitLines")
+              (>>)
+                (writeFile (home <> "/.foo") "make")
+                (appendFile (home <> "/.foo") "FilePrefixStyleSplitLines")
           )
     )
