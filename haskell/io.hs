@@ -82,16 +82,18 @@ testMaybeMonad = do
 
 -- *** thinking about `do` blocks
 
-myDo =
+myDoOutputs =
   let jFoo = MyJust "Foo"
       jBar = MyJust "Bar"
       lifted = liftA2 (<>) jFoo jBar -- FYI liftA2 is like bind (>>=) but with a binary operation (unwrap two monads), bind is unary operation (unwrap one monad)... both return a new monad (wrapped result of unary/binary op)
       nl = putStrLn mempty
    in putStr "foo" >> putStrLn "bar" >> nl >> nl >> print lifted
 
-myGet =
+myDoWithInput =
+  -- NOW it makes 100% sense why we have >> and >>= ... the former handles case where we don't care about the output... the latter takes the output and passes it! cool...
   putStrLn "please type a line:" >> getLine >>= putStrLn >> putStrLn "next"
 
-myGetLambda =
+myDoWithInputToLambda =
+  -- including second version to foster thinking a bit about how bind is working...
   -- parens just to group for readability on lambda/anon func
   putStrLn "please type a line:" >> getLine >>= (\x -> putStrLn x) >> putStrLn "next"
