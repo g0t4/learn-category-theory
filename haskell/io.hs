@@ -72,3 +72,8 @@ testMaybeMonad = do
   let lifted = liftA2 (<>) jFoo jBar
 
   putStrLn $ "lifted: " <> show lifted
+
+  let jDollar = MyJust 1.0
+  let jBuck50 = MyJust 1.50
+  let wallet = liftA2 (+) jDollar jBuck50
+  putStrLn $ "wallet: " <> show wallet
