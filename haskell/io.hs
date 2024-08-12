@@ -122,6 +122,7 @@ makeFileOneLineSplit =
         >> appendFile (home <> "/.foo") "FileOneLineSplit"
 
 makeFileIncludePathVar =
+  -- IIUC this is what a do block would look like once translated? lots of nesting for the various let bindings based on dependencies in do block
   getEnv "HOME"
     >>= \home ->
       return (home <> "/.foo")
