@@ -91,6 +91,7 @@ myDoOutputs =
 
 myDoWithInput =
   -- NOW it makes 100% sense why we have >> and >>= ... the former handles case where we don't care about the output... the latter takes the output and passes it! cool...
+  -- so, do blocks must translate into >> and >>= under the hood? and IO a (IO actions) is a monad (obviously)
   putStrLn "please type a line:" >> getLine >>= putStrLn >> putStrLn "next"
 
 myDoWithInputToLambda =
