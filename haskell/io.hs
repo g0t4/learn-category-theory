@@ -62,6 +62,12 @@ class (Functor m) => FlipFunctor m where
 
 instance FlipFunctor MyMaybe
 
+testFlipFunctor = do
+  let foo = MyJust 5
+
+  print $ ffmap (MyJust 5) (* 5) -- MyJust 25
+  print $ fmap (* 5) (MyJust 5) -- MyJust 25
+
 -- TLDR fmap with item first, function second
 
 testMaybeMonad = do
