@@ -23,7 +23,7 @@ testReadLine = do
   putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
 
 data MyMaybe a = MyNothing | MyJust a
-  deriving (Show)
+  deriving (Show, Eq)
 
 instance Functor (MyMaybe) where
   fmap :: (a -> b) -> MyMaybe a -> MyMaybe b
@@ -54,3 +54,6 @@ testMaybeMonad = do
 
   let j5 = MyJust 5
   print j5
+
+  let fmapJ5 = fmap id j5
+  print (fmapJ5 == j5)
