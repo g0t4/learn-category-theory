@@ -114,3 +114,9 @@ makeFileLetIn =
 
 makeFileOneLine =
   getEnv "HOME" >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileOneLine"
+
+makeFileLikeDo =
+  getEnv "HOME"
+    >>= \home ->
+      writeFile (home <> "/.foo") "make"
+        >> appendFile (home <> "/.foo") "FileOneLine"
