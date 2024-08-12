@@ -54,7 +54,7 @@ instance Monad MyMaybe where
 --   show MyNothing = "My Nothing"
 --   show (MyJust x) = show x
 
--- TODO finish trying this out? flip fmap args so we can use it instead of bind `>>= return` below
+-- TODO  I dont think I need this class type... derp wes, the func is universal.. TODO fix that
 class (Functor m) => FlipFunctor m where
   -- TODO better name thatn ffmap
   ffmap :: m a -> (a -> b) -> m b
