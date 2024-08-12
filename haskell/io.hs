@@ -54,6 +54,16 @@ instance Monad MyMaybe where
 --   show MyNothing = "My Nothing"
 --   show (MyJust x) = show x
 
+-- TODO finish trying this out? flip fmap args so we can use it instead of bind `>>= return` below
+class (Functor m) => FlipFunctor m where
+  -- TODO better name thatn ffmap
+  ffmap :: m a -> (a -> b) -> m b
+  ffmap i f = fmap f i
+
+instance FlipFunctor MyMaybe
+
+-- TLDR fmap with item first, function second
+
 testMaybeMonad = do
   let wesAge = "5"
   let paxAge = "10"
@@ -140,6 +150,16 @@ makeFileIncludePathVar2 =
     >>= \path ->
       writeFile (path) "make"
         >> appendFile (path) "FileIncludePathVar2"
+
+instance FlipFunctor IO
+
+makeFileIncludePathVar3ffmap =
+  -- IIUC this is what a do block would look like once translated? lots of nesting for the various let bindings based on dependencies in do block
+  getEnv "HOME"
+    `ffmap` (<> "/.foo")
+    >>= \path ->
+      writeFile (path) "make"
+        >> appendFile (path) "FileIncludePathVar3ffmap"
 
 makeFileLazyProblemsInAnonDo =
   getEnv "HOME"
