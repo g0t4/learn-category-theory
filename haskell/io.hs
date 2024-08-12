@@ -1,3 +1,5 @@
+import System.Environment (getEnv)
+
 test1 = putStrLn "foo" >> putStrLn "bar"
 
 test2 = do
@@ -98,3 +100,17 @@ myDoWithInputToLambda =
   -- including second version to foster thinking a bit about how bind is working...
   -- parens just to group for readability on lambda/anon func
   putStrLn "please type a line:" >> getLine >>= (\x -> putStrLn x) >> putStrLn "next"
+
+makeFileInDo = do
+  --- save to ~/.foo using HOME env var
+  home <- getEnv "HOME"
+  let path = home <> "/.foo"
+  writeFile path "make"
+  appendFile path "FileInDo"
+
+makeFileLetIn =
+  let path = (getEnv "HOME")
+   in path >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileLetIn"
+
+makeFileOneLine =
+  getEnv "HOME" >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileOneLine"
