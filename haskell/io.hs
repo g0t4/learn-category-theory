@@ -17,6 +17,7 @@ testReadLine = do
   user_input <- getLine
   putStr "you typed: " >> putStr user_input
 
+  -- Monad has >> operator which essentially sequences two operations and discards the result of the first, for reasons of side effects, the final result is the result of the right operation
   putStrLn mempty >> putStrLn mempty >> putStr "type a character: "
   a_char <- getChar
   putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
