@@ -24,7 +24,11 @@ testReadLine = do
 
 data MyMaybe a = MyNothing | MyJust a
   deriving (Show)
-  
+
+-- instance (Show a) => Show (MyMaybe a) where
+--   show MyNothing = "My Nothing"
+--   show (MyJust x) = show x
+
 testMaybeMonad = do
   let wesAge = "5"
   let paxAge = "10"
