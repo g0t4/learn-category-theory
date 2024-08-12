@@ -129,3 +129,14 @@ makeFileIncludePathVar =
         >>= \path ->
           writeFile (home <> "/.foo") "make"
             >> appendFile (home <> "/.foo") "FileIncludePathVar"
+
+makeFileLazyProblems =
+  getEnv "HOME"
+    >>= \home ->
+      return (home <> "/.foo")
+        >>= \path -> do
+          let writeIt = writeFile (home <> "/.foo") "make"
+          -- if we don't chain all IO actions with >> or >>= then they won't be executed b/c lazy eval
+          -- IOTW we only call appendFile and not writeFile (drop the `let writeIt =` to include it in the nested do block of the anon func)
+          appendFile (home <> "/.foo") "FileLazyProblems"
+
