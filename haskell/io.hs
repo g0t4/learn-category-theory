@@ -23,11 +23,8 @@ testReadLine = do
   putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
 
 data MyMaybe a = MyNothing | MyJust a
-
-instance (Show a) => Show (MyMaybe a) where
-  show MyNothing = "My Nothing"
-  show (MyJust x) = show x
-
+  deriving (Show)
+  
 testMaybeMonad = do
   let wesAge = "5"
   let paxAge = "10"
