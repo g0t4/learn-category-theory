@@ -77,3 +77,10 @@ testMaybeMonad = do
   let jBuck50 = MyJust 1.50
   let wallet = liftA2 (+) jDollar jBuck50
   putStrLn $ "wallet: " <> show wallet
+
+myDo =
+  let jFoo = MyJust "Foo"
+      jBar = MyJust "Bar"
+      lifted = liftA2 (<>) jFoo jBar -- FYI liftA2 is like bind (>>=) but with a binary operation (unwrap two monads)
+      nl = putStrLn mempty
+   in putStr "foo" >> putStrLn "bar" >> nl >> nl >> print lifted
