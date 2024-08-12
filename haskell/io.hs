@@ -36,7 +36,9 @@ instance Applicative (MyMaybe) where
   pure a = MyJust a
 
   liftA2 :: (a -> b -> c) -> MyMaybe a -> MyMaybe b -> MyMaybe c
-  liftA2 f fa fb = MyNothing -- TODO impl this
+  liftA2 _ _ MyNothing = MyNothing
+  liftA2 _ MyNothing _ = MyNothing
+  liftA2 f (MyJust a) (MyJust b) = MyJust (f a b) -- TODO is this correct?
 
 instance Monad (MyMaybe) where
   (>>=) :: MyMaybe a -> (a -> MyMaybe b) -> MyMaybe b
