@@ -54,13 +54,9 @@ instance Monad MyMaybe where
 --   show MyNothing = "My Nothing"
 --   show (MyJust x) = show x
 
--- TODO  I dont think I need this class type... derp wes, the func is universal.. TODO fix that
-class (Functor m) => FlipFunctor m where
-  -- TODO better name thatn ffmap
-  ffmap :: m a -> (a -> b) -> m b
-  ffmap i f = fmap f i
-
-instance FlipFunctor MyMaybe
+-- TODO better name thatn ffmap
+ffmap :: (Functor m) => m a -> (a -> b) -> m b
+ffmap i f = fmap f i
 
 testFlipFunctor = do
   let foo = MyJust 5
@@ -156,8 +152,6 @@ makeFileIncludePathVar2 =
     >>= \path ->
       writeFile (path) "make"
         >> appendFile (path) "FileIncludePathVar2"
-
-instance FlipFunctor IO
 
 makeFileIncludePathVar3ffmap =
   -- IIUC this is what a do block would look like once translated? lots of nesting for the various let bindings based on dependencies in do block
