@@ -22,6 +22,8 @@ testReadLine = do
   a_char <- getChar
   putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
 
+-- *** MyMaybe (custom Maybe impl w/ Monad et al instances)
+
 data MyMaybe a = MyNothing | MyJust a
   deriving (Show, Eq)
 
@@ -78,9 +80,11 @@ testMaybeMonad = do
   let wallet = liftA2 (+) jDollar jBuck50
   putStrLn $ "wallet: " <> show wallet
 
+-- *** thinking about `do` blocks
+
 myDo =
   let jFoo = MyJust "Foo"
       jBar = MyJust "Bar"
-      lifted = liftA2 (<>) jFoo jBar -- FYI liftA2 is like bind (>>=) but with a binary operation (unwrap two monads)
+      lifted = liftA2 (<>) jFoo jBar -- FYI liftA2 is like bind (>>=) but with a binary operation (unwrap two monads), bind is unary operation (unwrap one monad)... both return a new monad (wrapped result of unary/binary op)
       nl = putStrLn mempty
    in putStr "foo" >> putStrLn "bar" >> nl >> nl >> print lifted
