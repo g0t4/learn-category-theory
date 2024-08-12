@@ -32,7 +32,7 @@ data MyMaybe a = MyNothing | MyJust a
 instance Functor MyMaybe where
   fmap :: (a -> b) -> MyMaybe a -> MyMaybe b
   fmap _ MyNothing = MyNothing
-  fmap f (MyJust a) = MyJust (f a)
+  fmap f (MyJust a) = MyJust (f a) -- fmap == rewrap (bind w/o rewrap) => it's bind w/o requireing the bind func to rewrap the result
 
 instance Applicative MyMaybe where
   pure :: a -> MyMaybe a
