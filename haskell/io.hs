@@ -25,6 +25,24 @@ testReadLine = do
 data MyMaybe a = MyNothing | MyJust a
   deriving (Show)
 
+instance Functor (MyMaybe) where
+  fmap :: (a -> b) -> MyMaybe a -> MyMaybe b
+  fmap _ MyNothing = MyNothing
+  fmap f (MyJust a) = MyJust (f a)
+
+instance Applicative (MyMaybe) where
+  pure :: a -> MyMaybe a
+  -- FYI Monad's return = pure (https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Base.hs#L1370-L1372)
+  pure a = MyJust a
+
+  liftA2 :: (a -> b -> c) -> MyMaybe a -> MyMaybe b -> MyMaybe c
+  liftA2 f fa fb = MyNothing -- TODO impl this
+
+instance Monad (MyMaybe) where
+  (>>=) :: MyMaybe a -> (a -> MyMaybe b) -> MyMaybe b
+  MyNothing >>= _ = MyNothing
+  MyJust x >>= f = f x
+
 -- instance (Show a) => Show (MyMaybe a) where
 --   show MyNothing = "My Nothing"
 --   show (MyJust x) = show x
