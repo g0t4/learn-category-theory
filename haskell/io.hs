@@ -57,3 +57,9 @@ testMaybeMonad = do
 
   let fmapJ5 = fmap id j5
   print (fmapJ5 == j5)
+
+  let pure5 = pure 5 :: MyMaybe Int
+  print pure5
+
+  let return5 = return 5 :: MyMaybe Int
+  print return5
