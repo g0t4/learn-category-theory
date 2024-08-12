@@ -133,6 +133,14 @@ makeFileIncludePathVar =
           writeFile (path) "make"
             >> appendFile (path) "FileIncludePathVar"
 
+makeFileIncludePathVar2 =
+  -- IIUC this is what a do block would look like once translated? lots of nesting for the various let bindings based on dependencies in do block
+  getEnv "HOME"
+    >>= return . (<> "/.foo")
+    >>= \path ->
+      writeFile (path) "make"
+        >> appendFile (path) "FileIncludePathVar2"
+
 makeFileLazyProblemsInAnonDo =
   getEnv "HOME"
     >>= \home ->
