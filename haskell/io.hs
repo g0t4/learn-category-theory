@@ -21,3 +21,17 @@ testReadLine = do
   putStrLn mempty >> putStrLn mempty >> putStr "type a character: "
   a_char <- getChar
   putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
+
+data MyMaybe a = MyNothing | MyJust a
+
+instance (Show a) => Show (MyMaybe a) where
+  show MyNothing = "My Nothing"
+  show (MyJust x) = show x
+
+testMaybeMonad = do
+  let wesAge = "5"
+  let paxAge = "10"
+  let otherAge = ""
+
+  let j5 = MyJust 5
+  print j5
