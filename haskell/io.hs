@@ -113,6 +113,9 @@ makeFileLetIn =
    in path >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileLetIn"
 
 makeFileOneLine =
+  -- observation
+  --  >>= is bind w/ passed arg (think "thenWith")
+  --  >> is bind w/o passed arg (thin "then")
   getEnv "HOME" >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileOneLine"
 
 makeFileOneLineSplit =
@@ -130,7 +133,7 @@ makeFileIncludePathVar =
           writeFile (home <> "/.foo") "make"
             >> appendFile (home <> "/.foo") "FileIncludePathVar"
 
-makeFileLazyProblems =
+makeFileLazyProblemsInAnonDo =
   getEnv "HOME"
     >>= \home ->
       return (home <> "/.foo")
@@ -138,5 +141,24 @@ makeFileLazyProblems =
           let writeIt = writeFile (home <> "/.foo") "make"
           -- if we don't chain all IO actions with >> or >>= then they won't be executed b/c lazy eval
           -- IOTW we only call appendFile and not writeFile (drop the `let writeIt =` to include it in the nested do block of the anon func)
-          appendFile (home <> "/.foo") "FileLazyProblems"
+          appendFile (home <> "/.foo") "FileLazyProblemsInAnonDo"
 
+makeFilePrefixStyleOneLine =
+  -- infix style is used above with >> and >>=
+  -- here is what prefix looks like (all on one line)
+  -- all in one line is TERRIBLE vs infix one line above
+  (>>=) (getEnv "HOME") (\home -> (>>=) (return (home <> "/.foo")) (\path -> (>>) (writeFile (home <> "/.foo") "make") (appendFile (home <> "/.foo") "FilePrefixStyleOneLine")))
+
+makeFilePrefixStyleSplitLines =
+  -- same as prior but across multiple lines
+  -- SO, which do you prefer? which reads better
+  -- IMO the infix style is perfect
+  (>>=)
+    (getEnv "HOME")
+    ( \home ->
+        (>>=)
+          (return (home <> "/.foo"))
+          ( \path ->
+              (>>) (writeFile (home <> "/.foo") "make") (appendFile (home <> "/.foo") "FilePrefixStyleSplitLines")
+          )
+    )
