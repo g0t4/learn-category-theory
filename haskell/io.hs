@@ -25,12 +25,12 @@ testReadLine = do
 data MyMaybe a = MyNothing | MyJust a
   deriving (Show, Eq)
 
-instance Functor (MyMaybe) where
+instance Functor MyMaybe where
   fmap :: (a -> b) -> MyMaybe a -> MyMaybe b
   fmap _ MyNothing = MyNothing
   fmap f (MyJust a) = MyJust (f a)
 
-instance Applicative (MyMaybe) where
+instance Applicative MyMaybe where
   pure :: a -> MyMaybe a
   -- FYI Monad's return = pure (https://github.com/ghc/ghc/blob/a1e42e7ac6121404afb2a42e11d0c778ce0fe483/libraries/ghc-internal/src/GHC/Internal/Base.hs#L1370-L1372)
   pure a = MyJust a
@@ -40,7 +40,8 @@ instance Applicative (MyMaybe) where
   liftA2 _ MyNothing _ = MyNothing
   liftA2 f (MyJust a) (MyJust b) = MyJust (f a b) -- TODO is this correct?
 
-instance Monad (MyMaybe) where
+instance Monad MyMaybe where
+  -- return = pure -- default impl in `class Monad`
   (>>=) :: MyMaybe a -> (a -> MyMaybe b) -> MyMaybe b
   MyNothing >>= _ = MyNothing
   MyJust x >>= f = f x
