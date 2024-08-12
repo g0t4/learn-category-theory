@@ -66,3 +66,9 @@ testMaybeMonad = do
 
   let return5 = return 5 :: MyMaybe Int
   print return5
+
+  let jFoo = MyJust "Foo"
+  let jBar = MyJust "Bar"
+  let lifted = liftA2 (<>) jFoo jBar
+
+  putStrLn $ "lifted: " <> show lifted
