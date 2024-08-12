@@ -88,3 +88,10 @@ myDo =
       lifted = liftA2 (<>) jFoo jBar -- FYI liftA2 is like bind (>>=) but with a binary operation (unwrap two monads), bind is unary operation (unwrap one monad)... both return a new monad (wrapped result of unary/binary op)
       nl = putStrLn mempty
    in putStr "foo" >> putStrLn "bar" >> nl >> nl >> print lifted
+
+myGet =
+  putStrLn "please type a line:" >> getLine >>= putStrLn >> putStrLn "next"
+
+myGetLambda =
+  -- parens just to group for readability on lambda/anon func
+  putStrLn "please type a line:" >> getLine >>= (\x -> putStrLn x) >> putStrLn "next"
