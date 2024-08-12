@@ -11,3 +11,12 @@ test2 = do
   bar >> foo >> nl
   both
   both
+
+testReadLine = do
+  putStrLn "type a line and hit return when done: "
+  user_input <- getLine
+  putStr "you typed: " >> putStr user_input
+
+  putStrLn mempty >> putStrLn mempty >> putStr "type a character: "
+  a_char <- getChar
+  putStrLn mempty >> putStrLn "you typed: " >> putChar a_char >> putStrLn mempty
