@@ -130,24 +130,24 @@ makeFileIncludePathVar =
     >>= \home ->
       return (home <> "/.foo")
         >>= \path ->
-          writeFile (home <> "/.foo") "make"
-            >> appendFile (home <> "/.foo") "FileIncludePathVar"
+          writeFile (path) "make"
+            >> appendFile (path) "FileIncludePathVar"
 
 makeFileLazyProblemsInAnonDo =
   getEnv "HOME"
     >>= \home ->
       return (home <> "/.foo")
         >>= \path -> do
-          let writeIt = writeFile (home <> "/.foo") "make"
+          let writeIt = writeFile (path) "make"
           -- if we don't chain all IO actions with >> or >>= then they won't be executed b/c lazy eval
           -- IOTW we only call appendFile and not writeFile (drop the `let writeIt =` to include it in the nested do block of the anon func)
-          appendFile (home <> "/.foo") "FileLazyProblemsInAnonDo"
+          appendFile (path) "FileLazyProblemsInAnonDo"
 
 makeFilePrefixStyleOneLine =
   -- infix style is used above with >> and >>=
   -- here is what prefix looks like (all on one line)
   -- all in one line is TERRIBLE vs infix one line above
-  (>>=) (getEnv "HOME") (\home -> (>>=) (return (home <> "/.foo")) (\path -> (>>) (writeFile (home <> "/.foo") "make") (appendFile (home <> "/.foo") "FilePrefixStyleOneLine")))
+  (>>=) (getEnv "HOME") (\home -> (>>=) (return (home <> "/.foo")) (\path -> (>>) (writeFile (path) "make") (appendFile (path) "FilePrefixStyleOneLine")))
 
 makeFilePrefixStyleSplitLines =
   -- same as prior but across multiple lines
@@ -160,8 +160,8 @@ makeFilePrefixStyleSplitLines =
           (return (home <> "/.foo"))
           ( \path ->
               (>>)
-                (writeFile (home <> "/.foo") "make")
-                (appendFile (home <> "/.foo") "FilePrefixStyleSplitLines")
+                (writeFile (path) "make")
+                (appendFile (path) "FilePrefixStyleSplitLines")
           )
     )
 
