@@ -115,8 +115,16 @@ makeFileLetIn =
 makeFileOneLine =
   getEnv "HOME" >>= \home -> writeFile (home <> "/.foo") "make" >> appendFile (home <> "/.foo") "FileOneLine"
 
-makeFileLikeDo =
+makeFileOneLineSplit =
   getEnv "HOME"
     >>= \home ->
       writeFile (home <> "/.foo") "make"
-        >> appendFile (home <> "/.foo") "FileOneLine"
+        >> appendFile (home <> "/.foo") "FileOneLineSplit"
+
+makeFileIncludePathVar =
+  getEnv "HOME"
+    >>= \home ->
+      return (home <> "/.foo")
+        >>= \path ->
+          writeFile (home <> "/.foo") "make"
+            >> appendFile (home <> "/.foo") "FileIncludePathVar"
