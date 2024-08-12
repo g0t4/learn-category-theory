@@ -154,9 +154,8 @@ makeFileIncludePathVar2 =
         >> appendFile (path) "FileIncludePathVar2"
 
 makeFileIncludePathVar3ffmap =
-  -- IIUC this is what a do block would look like once translated? lots of nesting for the various let bindings based on dependencies in do block
   getEnv "HOME"
-    `ffmap` (<> "/.foo")
+    `ffmap` (<> "/.foo") -- TODO better name that doesn't just work here but universally? Perhaps not b/c fmap is kinda odd anyways? perhaps `bmap`?
     >>= \path ->
       writeFile (path) "make"
         >> appendFile (path) "FileIncludePathVar3ffmap"
