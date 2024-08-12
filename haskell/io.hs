@@ -164,3 +164,18 @@ makeFilePrefixStyleSplitLines =
                 (appendFile (home <> "/.foo") "FilePrefixStyleSplitLines")
           )
     )
+
+{-
+
+NEXT UP intuitions
+- chaining >> and >>= calls is akin to JS chaining promises (>>=/>> are like .then)
+  - there must be some sort of failure chain for error handling if prev IO action fails
+    - ? catch? IIRC I saw a MonadFail type was that where it is at?
+- do blocks are like async/await in JS
+  - they are syntactic sugar for chaining IO actions
+  - albeit chaining is sufficient to read, do blocks are more readable (looks like imperative code)
+  - flip >>= and unroll nested lambdas!
+  - IIUC `do` transforms <- into >>=, handles scope for let bindings, and for expressions joins them with >>... this is known as a Continuation-passing style (CPS) transformation
+    - https://en.wikipedia.org/wiki/Continuation-passing_style
+
+-}
