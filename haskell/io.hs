@@ -208,6 +208,12 @@ NEXT UP intuitions
 
 -}
 
+testPrintColorful =
+  do
+    putStrLnRed "this is red"
+    >> putStrLn "this is normal"
+    >> putStrLnGreen "this is green"
+
 {-
 thinking about lazy and IO
 -}
@@ -224,9 +230,3 @@ lazyIODemo =
    in sayHello
         >> raiseAMathError
         >> sayHello
-
-testPrintColorful =
-  do
-    putStrLnRed "this is red"
-    >> putStrLn "this is normal"
-    >> putStrLnGreen "this is green"
