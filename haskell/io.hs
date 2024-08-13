@@ -251,7 +251,8 @@ lazyIODemo3BindWithoutPrint =
         >> sayHello
 
 lazyIODemo4DoubleDiscarded =
-  -- rework into new IO action so its deferred once again, and so we don't use it b/c its discraded just like in v1 above... then the same output as v1 above
+  -- rework into new IO action so its deferred once again, and so we don't use it b/c its discraded just like in v1 above...
+  -- same output as v1 above
   sayHello
     >> raiseAMathError
     >>= \a ->
@@ -259,7 +260,8 @@ lazyIODemo4DoubleDiscarded =
         >> sayHello
 
 lazyIODemo5DoubleDependEvaluated =
-  -- rework into new IO action so its deferred once again, and so we don't use it b/c its discraded just like in v1 above... then the same output as v1 above
+  -- and then if we take our double wrapped expression and evaluate it then it fails b/c it starts with division by 0!
+  -- same output as v2 above
   sayHello
     >> raiseAMathError
     >>= \a ->
