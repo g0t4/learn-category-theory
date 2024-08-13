@@ -1,3 +1,4 @@
+import PrintColor (printRed)
 import System.Environment (getEnv)
 
 test1 = putStrLn "foo" >> putStrLn "bar"
@@ -206,3 +207,20 @@ NEXT UP intuitions
     - https://en.wikipedia.org/wiki/Continuation-passing_style
 
 -}
+
+{-
+thinking about lazy and IO
+-}
+
+lazyIODemo :: IO ()
+lazyIODemo =
+  -- from Effective Haskell book
+  let sayHello :: IO ()
+      sayHello = putStrLn "Hello"
+      raiseAMathError :: IO Int
+      raiseAMathError =
+        putStrLn "I'm part of raiseAMathError"
+          >> return (1 `div` 0)
+   in sayHello
+        >> raiseAMathError
+        >> sayHello
