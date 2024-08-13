@@ -230,3 +230,17 @@ lazyIODemo =
    in sayHello
         >> raiseAMathError
         >> sayHello
+
+lazyIODemo2 :: IO ()
+lazyIODemo2 =
+  -- from Effective Haskell book
+  let sayHello :: IO ()
+      sayHello = putStrLn "Hello"
+      raiseAMathError :: IO Int
+      raiseAMathError =
+        putStrLn "I'm part of raiseAMathError"
+          >> return (1 `div` 0)
+   in sayHello
+        >> raiseAMathError
+        >>= \a -> print a
+        >> sayHello
