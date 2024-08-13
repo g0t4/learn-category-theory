@@ -228,5 +228,5 @@ lazyIODemo =
 testPrintColorful =
   do
     putStrLnRed "this is red"
-    >> putStrLn "this is not red"
+    >> putStrLn "this is normal"
     >> putStrLnGreen "this is green"
