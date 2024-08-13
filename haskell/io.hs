@@ -216,32 +216,36 @@ testPrintColorful =
 
 {-
 thinking about lazy and IO
+  FYI lazyIODemo is from from Effective Haskell book
 -}
 
-lazyIODemo :: IO ()
-lazyIODemo =
-  -- from Effective Haskell book
-  let sayHello :: IO ()
-      sayHello = putStrLn "Hello"
-      raiseAMathError :: IO Int
-      raiseAMathError =
-        putStrLn "I'm part of raiseAMathError"
-          >> return (1 `div` 0) -- we are returning an IO action that will only be executed if we use it (in a chain of IO actions where the final IO action depends on the result of this one)
-   in sayHello
-        >> raiseAMathError -- >> discards the expression and so its never evaluated and thus never fails... normally we would have a dependency on the result of a computation and so that would evaluate it... it's not that logical to call `div` for what, side effects?! lol... maybe to test it works and fail if not (don't care about the result, ok so maybe you get that in unit testing?)
+sayHello :: IO ()
+sayHello = putStrLn "Hello"
+raiseAMathError :: IO Int
+raiseAMathError =
+  putStrLn "I'm part of raiseAMathError"
+    >> return (1 `div` 0) -- we are returning an IO action that will only be executed if we use it (in a chain of IO actions where the final IO action depends on the result of this one)
+
+lazyIODemo1 :: IO ()
+lazyIODemo1 =
+  sayHello
+    >> raiseAMathError
+    -- discarded expression that divides by 0... just continues to next print
+    -- when I say next print, I mean next IO action that produces output from any number of methods  (putStrLn, print, etc)
+    >> sayHello
+
+lazyIODemo2PrintTriggersException =
+  sayHello
+    >> raiseAMathError
+    >>= \a ->
+      -- bind and use it to print (side effect) => triggers exception
+      print a
         >> sayHello
 
-lazyIODemo2 :: IO ()
-lazyIODemo2 =
-  -- from Effective Haskell book
-  let sayHello :: IO ()
-      sayHello = putStrLn "Hello"
-      raiseAMathError :: IO Int
-      raiseAMathError =
-        putStrLn "I'm part of raiseAMathError"
-          >> return (1 `div` 0)
-   in sayHello
-        >> raiseAMathError
-        >>= \a ->
-          print a
-            >> sayHello
+lazyIODemo3BindWithoutPrint =
+  sayHello
+    >> raiseAMathError
+    >>= \_ ->
+      -- bind but don't use => not evaluated => no exception
+      putStrLn "foo"
+        >> sayHello
