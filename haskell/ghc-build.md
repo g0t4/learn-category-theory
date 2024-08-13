@@ -25,6 +25,8 @@ cd ghc
 ./configure # defaults succeeded, that said the guide above passed somee options
 hadrian/build
 
+# build failed after a while, TODO does fixing it fix F12 in ghc/ghc repo?
+
 ```
 
 ## F12 statuss
