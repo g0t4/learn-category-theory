@@ -1,4 +1,4 @@
-import PrintColor (printRed)
+import PrintColor (printGreen, printRed)
 import System.Environment (getEnv)
 
 test1 = putStrLn "foo" >> putStrLn "bar"
@@ -224,3 +224,9 @@ lazyIODemo =
    in sayHello
         >> raiseAMathError
         >> sayHello
+
+testPrintColorful =
+  do
+    printRed "this is red"
+    >> putStrLn "this is not red"
+    >> printGreen "this is green"
