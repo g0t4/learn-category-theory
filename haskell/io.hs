@@ -228,7 +228,7 @@ lazyIODemo =
         putStrLn "I'm part of raiseAMathError"
           >> return (1 `div` 0)
    in sayHello
-        >> raiseAMathError
+        >> raiseAMathError -- >> discards the expression and so its never evaluated and thus never fails... normally we would have a dependency on the result of a computation and so that would evaluate it... it's not that logical to call `div` for what, side effects?! lol... maybe to test it works and fail if not (don't care about the result, ok so maybe you get that in unit testing?)
         >> sayHello
 
 lazyIODemo2 :: IO ()
