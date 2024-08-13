@@ -257,3 +257,13 @@ lazyIODemo4DoubleDiscarded =
     >>= \a ->
       return (print a)
         >> sayHello
+
+lazyIODemo5DoubleDependEvaluated =
+  -- rework into new IO action so its deferred once again, and so we don't use it b/c its discraded just like in v1 above... then the same output as v1 above
+  sayHello
+    >> raiseAMathError
+    >>= \a ->
+      return (print a)
+        >>= \e ->
+          e
+            >> sayHello
