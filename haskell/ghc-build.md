@@ -1,6 +1,8 @@
 
 ## attempting to fix code nav in ghc/ghc repo (F12 fails, as do code lens hints) 
 
+FYI per haskell-language-server docs: code nav is supported https://haskell-language-server.readthedocs.io/en/latest/features.html#call-hierarchy
+
 ```bash
 
 # seeing if once I get a build working that all the deps are in place and all files are generated to make code nav work... FYI View -> Output -> Select Haskell from dropdown -> review errors
