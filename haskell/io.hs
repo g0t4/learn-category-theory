@@ -155,7 +155,7 @@ makeFileIncludePathVar2 =
 
 makeFileIncludePathVar3ffmap =
   getEnv "HOME"
-    `ffmap` (<> "/.foo") -- TODO better name that doesn't just work here but universally? Perhaps not b/c fmap is kinda odd anyways? perhaps `bmap`?
+    `ffmap` (<> "/.foo")
     >>= \path ->
       writeFile (path) "make"
         >> appendFile (path) "FileIncludePathVar3ffmap"
