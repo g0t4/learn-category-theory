@@ -268,4 +268,5 @@ lazyIODemo5DoubleDependEvaluated =
       return (print a)
         >>= \e ->
           e
+            -- >> executes LHS func, yes discards result but still invokes LHS and thus boom
             >> sayHello
