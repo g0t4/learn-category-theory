@@ -1,4 +1,4 @@
-module PrintColor where
+module PrintInColor where
 
 resetColor = "\x1b[0m"
 
@@ -12,10 +12,10 @@ magentaText = colorText "\x1b[35m"
 cyanText = colorText "\x1b[36m"
 whiteText = colorText "\x1b[37m"
 
-printRed = print . redText
-printGreen = print . greenText
-printYellow = print . yellowText
-printBlue = print . blueText
-printMagenta = print . magentaText
-printCyan = print . cyanText
-printWhite = print . whiteText
+putStrLnRed = putStrLn . redText
+putStrLnGreen = putStrLn . greenText
+putStrLnYellow = putStrLn . yellowText
+putStrLnBlue = putStrLn . blueText
+putStrLnMagenta = putStrLn . magentaText
+putStrLnCyan = putStrLn . cyanText
+putStrLnWhite = putStrLn . whiteText
