@@ -26,3 +26,12 @@ cd ghc
 hadrian/build
 
 ```
+
+## F12 statuss
+
+- FYI, F12 works in my code in this repo (but not to std lib code, not sure if its supposed to or not)
+- BUT, F12 in ghc/ghc repo (opened in vscode separately) fails and logs to the haskell-language-server output window:
+```log
+  Message: codeRange: Rule Failed: GetCodeRange
+  Code: -32803
+```
