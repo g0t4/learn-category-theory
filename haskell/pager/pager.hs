@@ -1,4 +1,5 @@
 import Control.Exception qualified as Exception
+import Data.ByteString qualified as ByteString
 import Data.Text qualified as Text
 import Data.Text.IO qualified as TextIO
 import System.Environment (getArgs)
