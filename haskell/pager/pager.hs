@@ -16,8 +16,9 @@ main =
 
 runHCat = do
   (getArgs :: IO [String])
-    >>= parseArgs -- <$> (aka fmap) is needed to apply func w/o IO monad wrapper, think of this as the pure functional middle part, so <$> takes this out of the IO paradigm long enough to start parsing args
+    >>= parseArgs
 
 parseArgs :: [String] -> IO String
+-- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
 parseArgs [] = Exception.throwIO . IOError.userError $ "you forgot to pass args"
 parseArgs (head : _) = return head
