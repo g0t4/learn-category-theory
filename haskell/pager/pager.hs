@@ -15,9 +15,12 @@ main =
   runHCat >>= print
 
 runHCat = do
-  (getArgs :: IO [String])
-    >>= parseArgs
-    >>= readFile
+  let happyPath =
+        do
+          (getArgs :: IO [String])
+          >>= parseArgs
+          >>= readFile
+  happyPath
 
 parseArgs :: [String] -> IO String
 -- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
