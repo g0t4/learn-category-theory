@@ -1,6 +1,6 @@
 module Main where
 
-import qualified MyLib (someFunc)
+import qualified HCat (someFunc)
 
 main :: IO ()
 main = do
