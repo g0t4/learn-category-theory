@@ -13,7 +13,6 @@ myPrintArgs args = foldl (\accum current -> accum >> putStrLn ("  " <> current))
 -- ghci => :load pager.hs =>  System.Environment.withArgs ["--foo", "--bar"] runHCat
 main =
   runHCat
-    >> putStrLn "done"
 
 runHCat = do
   Exception.catch happyPath (putStrLnRed . show @IOError) -- @IOError is a type hint to inference
