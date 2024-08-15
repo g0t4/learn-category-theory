@@ -16,13 +16,14 @@ main =
     >>= putStrLn
 
 runHCat = do
-  Exception.catch happyPath (return . (show @IOError)) -- @IOError is a type hint to inference
+  Exception.catch happyPath (return . sadPath) -- @IOError is a type hint to inference
  where
   happyPath =
     do
       (getArgs :: IO [String])
       >>= parseArgs
       >>= readFile
+  sadPath = show @IOError
 
 parseArgs :: [String] -> IO String
 -- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
