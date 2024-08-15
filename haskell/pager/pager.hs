@@ -17,8 +17,9 @@ main =
 runHCat = do
   (getArgs :: IO [String])
     >>= parseArgs
+    >>= readFile
 
 parseArgs :: [String] -> IO String
 -- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
-parseArgs [] = Exception.throwIO . IOError.userError $ "you forgot to pass args"
+parseArgs [] = Exception.throwIO . IOError.userError $ "Hey dumbhead, pass a filename next time, derp..."
 parseArgs (head : _) = return head
