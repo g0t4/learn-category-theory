@@ -4,12 +4,11 @@ import System.Directory.Internal.Prelude (getArgs)
 
 -- args = getArgs
 
-myPrintArgs [] = putStrLn ""
-myPrintArgs (head : rest) = putStrLn head >> myPrintArgs rest
+myPrintArgs args = foldl (\accum current -> accum >> putStrLn current) (putStrLn "") args
 
 -- runhaskell pager.hs --foo bar
 main =
   getArgs >>= \args ->
-    foldl (\accum current -> accum >> putStrLn current) (putStrLn "") args
+    myPrintArgs args
 
 --  myPrintArgs args
