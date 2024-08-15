@@ -32,5 +32,5 @@ putStrLnRed = putStrLn . redText
 
 parseArgs :: [String] -> IO String
 -- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
-parseArgs [] = Exception.throwIO . IOError.userError $ "Hey dumbhead, pass a filename next time, derp..."
+parseArgs [] = Exception.throwIO . IOError.userError $ "No file provided"
 parseArgs (head : _) = return head
