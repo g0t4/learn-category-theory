@@ -4,7 +4,8 @@ import System.Directory.Internal.Prelude (getArgs)
 
 -- args = getArgs
 
-myPrintArgs args = foldl (\accum current -> accum >> putStrLn current) (putStr "") args
+noop = return ()
+myPrintArgs = foldl (\accum current -> accum >> putStrLn current) noop
 
 -- runhaskell pager.hs --foo bar
 main =
