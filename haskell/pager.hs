@@ -7,9 +7,9 @@ import System.Directory.Internal.Prelude (getArgs)
 myPrintArgs [] = putStrLn ""
 myPrintArgs (head : rest) = putStrLn head >> myPrintArgs rest
 
-main = do
-  -- runhaskell pager.hs --foo bar
-  args <- getArgs
-  foldl (\a c -> a >> putStrLn c) (putStrLn "") args
+-- runhaskell pager.hs --foo bar
+main =
+  getArgs >>= \args ->
+    foldl (\a c -> a >> putStrLn c) (putStrLn "") args
 
-  --  myPrintArgs args
+--  myPrintArgs args
