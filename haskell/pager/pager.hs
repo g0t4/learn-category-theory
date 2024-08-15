@@ -9,4 +9,7 @@ myPrintArgs args = foldl (\accum current -> accum >> putStrLn current) noop args
 
 -- runhaskell pager.hs --foo bar
 main =
-  getArgs >>= myPrintArgs
+  -- getArgs >>= myPrintArgs
+  runHCat
+
+runHCat = return ()
