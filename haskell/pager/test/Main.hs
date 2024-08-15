@@ -1,4 +1,3 @@
 module Main (main) where
 
-main :: IO ()
-main = putStrLn "Test suite not yet implemented."
+main = print (1 `div` 0)
