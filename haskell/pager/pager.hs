@@ -10,9 +10,11 @@ myPrintArgs args = foldl (\accum current -> accum >> putStrLn ("  " <> current))
 -- runhaskell pager.hs --foo bar
 -- ghci => :load pager.hs =>  System.Environment.withArgs ["--foo", "--bar"] runHCat
 main =
-  runHCat
+  runHCat >>= print
 
-runHCat =
-  putStrLn "Args:"
-    >> getArgs
-    >>= myPrintArgs
+runHCat = do
+  parseArgs <$> getArgs
+
+parseArgs :: [b] -> Either String b
+parseArgs [] = Left "you forgot to pass args"
+parseArgs (head : _) = Right head
