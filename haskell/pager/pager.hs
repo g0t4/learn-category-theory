@@ -1,4 +1,6 @@
 import Control.Exception qualified as Exception
+import Data.Text qualified as Text
+import Data.Text.IO qualified as TextIO
 import System.Environment (getArgs)
 import System.IO.Error qualified as IOError
 
@@ -21,8 +23,8 @@ runHCat = do
     do
       (getArgs :: IO [String])
       >>= parseArgs
-      >>= readFile
-      >>= putStrLn
+      >>= TextIO.readFile
+      >>= TextIO.putStrLn
   sadPath = print @IOError
 
 resetColor = "\x1b[0m"
