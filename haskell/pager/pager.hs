@@ -18,7 +18,7 @@ main =
   runHCat
     >> putStrLn "press any key to terminate..."
     >> getChar
-    >>= \_ -> print "done"
+    >> print "done"
 
 runHCat = do
   Exception.catch happyPath (putStrLnRed . show @IOError) -- @IOError is a type hint to inference
