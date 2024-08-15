@@ -13,8 +13,8 @@ main =
   runHCat >>= print
 
 runHCat = do
-  (getArgs :: IO [String]) >>= parseArgs -- or use bind and require func to wrap (return) on its return... messier obviously (just a good mental exercise to practice using bind vs fmap)
+  parseArgs <$> (getArgs :: IO [String]) -- <$> (aka fmap) is needed to apply func w/o IO monad wrapper, think of this as the pure functional middle part, so <$> takes this out of the IO paradigm long enough to start parsing args
 
-parseArgs :: [a] -> IO (Either String a)
-parseArgs [] = return (Left "you forgot to pass args")
-parseArgs (head : _) = return (Right head)
+parseArgs :: [a] -> Either String a
+parseArgs [] = Left "you forgot to pass args"
+parseArgs (head : _) = Right head
