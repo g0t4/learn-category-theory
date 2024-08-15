@@ -8,7 +8,6 @@ myPrintArgs args = foldl (\accum current -> accum >> putStrLn current) (putStrLn
 
 -- runhaskell pager.hs --foo bar
 main =
-  getArgs >>= \args ->
-    myPrintArgs args
+  getArgs >>= myPrintArgs
 
 --  myPrintArgs args
