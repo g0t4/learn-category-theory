@@ -10,6 +10,6 @@ myPrintArgs (head : rest) = putStrLn head >> myPrintArgs rest
 -- runhaskell pager.hs --foo bar
 main =
   getArgs >>= \args ->
-    foldl (\a c -> a >> putStrLn c) (putStrLn "") args
+    foldl (\accum current -> accum >> putStrLn current) (putStrLn "") args
 
 --  myPrintArgs args
