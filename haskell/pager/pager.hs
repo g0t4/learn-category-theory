@@ -1,4 +1,6 @@
+import Control.Exception qualified as Exception
 import System.Environment (getArgs)
+import System.IO.Error qualified as IOError
 
 -- based on Effective Haskell book example, with my own improv along the way
 
@@ -13,8 +15,9 @@ main =
   runHCat >>= print
 
 runHCat = do
-  parseArgs <$> (getArgs :: IO [String]) -- <$> (aka fmap) is needed to apply func w/o IO monad wrapper, think of this as the pure functional middle part, so <$> takes this out of the IO paradigm long enough to start parsing args
+  (getArgs :: IO [String])
+    >>= parseArgs -- <$> (aka fmap) is needed to apply func w/o IO monad wrapper, think of this as the pure functional middle part, so <$> takes this out of the IO paradigm long enough to start parsing args
 
-parseArgs :: [a] -> Either String a
-parseArgs [] = Left "you forgot to pass args"
-parseArgs (head : _) = Right head
+parseArgs :: [String] -> IO String
+parseArgs [] = Exception.throwIO . IOError.userError $ "you forgot to pass args"
+parseArgs (head : _) = return head
