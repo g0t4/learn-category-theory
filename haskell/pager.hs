@@ -1,0 +1,1 @@
+-- based on Effective Haskell book example, with my own improv along the way
