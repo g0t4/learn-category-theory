@@ -13,17 +13,23 @@ myPrintArgs args = foldl (\accum current -> accum >> putStrLn ("  " <> current))
 -- ghci => :load pager.hs =>  System.Environment.withArgs ["--foo", "--bar"] runHCat
 main =
   runHCat
-    >>= putStrLn
+    >> putStrLn "done"
 
 runHCat = do
-  Exception.catch happyPath (return . sadPath) -- @IOError is a type hint to inference
+  Exception.catch happyPath (putStrLnRed . show @IOError) -- @IOError is a type hint to inference
  where
   happyPath =
     do
       (getArgs :: IO [String])
       >>= parseArgs
       >>= readFile
-  sadPath = show @IOError
+      >>= putStrLn
+  sadPath = print @IOError
+
+resetColor = "\x1b[0m"
+colorText color text = color ++ text ++ resetColor
+redText = colorText "\x1b[31m"
+putStrLnRed = putStrLn . redText
 
 parseArgs :: [String] -> IO String
 -- by rewriting parseArgs to use bind, we can now control returning the IO monad and thus we can throw an error (or return string) and don't need the Either type any longer!
