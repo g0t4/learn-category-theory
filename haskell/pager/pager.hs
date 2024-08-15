@@ -16,7 +16,7 @@ main =
     >>= putStrLn
 
 runHCat = do
-  Exception.catch happyPath (\e -> return (show @IOError e))
+  Exception.catch happyPath (return . (show @IOError)) -- @IOError is a type hint to inference
  where
   happyPath =
     do
