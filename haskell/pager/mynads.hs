@@ -67,20 +67,13 @@ class MyNads m where
   -- instances have to define wrapping (data type ctor)
   wrap :: a -> m a -- aka return
 
-  return :: a -> m a
-  return = wrap
-
   -- instances have to define unwrapping (i.e. w/ destruct pattern matching)
-  bind :: (a -> b) -> m a -> m b
-
-  -- alias
-  (>>=) :: (a -> b) -> m a -> m b
-  (>>=) = bind
+  bind :: m a -> (a -> b) -> m b
 
 instance MyNads MyBox where
   wrap a = MyBox a
 
-  bind func (MyBox a) = wrap (func a)
+  bind (MyBox a) func = wrap (func a)
 
 testMyNads = do
   let surprise = MyBox "backdoor"
@@ -89,7 +82,8 @@ testMyNads = do
 
 testMyNads2 = do
   let surprise = wrap "otherdoor" :: MyBox String
-  let tellMe = bind ("likes it in the " <>) surprise
+  let tellMe = bind surprise ("likes it in the " <>)
+  let tellMe2 = surprise `bind` ("likes it in the " <>)
   -- b/c show is impl'd on the type param I can use bind in place of fmap and pass to print and have no difference
   print tellMe
 
@@ -116,14 +110,17 @@ instance Applicative MyBox where
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
-  unwrapped1 <- (\unwrapd -> unwrapd <> "spit") `bind` MyBox "bull" -- explicit lambda to make clear what is happening
+  unwrapped1 <- MyBox "bull" `bind` (\unwrapd -> unwrapd <> "spit") -- explicit lambda to make clear what is happening
+
+  -- unwrapped 3
+  unwrapped3 <- MyBox "bull" `bind` (\unwrapd -> unwrapd <> "spit")
 
   -- unwrapped2
   unwrapped2 <- MyBox "fudge"
   let foo2 = unwrapped2 <> "pole" -- string ops!
 
   -- return wrapped
-  wrap (unwrapped1 <> "  |  " <> foo2)
+  wrap (unwrapped1 <> "  |  " <> foo2 <> "  |  " <> unwrapped3)
 
 class (MyNads f) => MyApphole f where
   -- hold your tongue and say My Apple
