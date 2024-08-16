@@ -88,6 +88,7 @@ testMyNads = do
   print tellMe
 
 testMyNads2 = do
-  let surprise = wrap "backdoor" :: MyBox String
+  let surprise = wrap "otherdoor" :: MyBox String
   let tellMe = bind ("likes it in the " <>) surprise
+  -- b/c show is impl'd on the type param I can use bind in place of fmap and pass to print and have no difference
   print tellMe
