@@ -35,8 +35,9 @@ instance MyFunbags [] where
 testLessDollar = do
   let original = [1, 2, 3]
   putStrLn "original: " >> print original
-  let altered = True Main.<$ original
-  putStrLn "altered: " >> print altered
+  -- use <$ operator
+  putStrLn "altered: " >> print (True Main.<$ original)
+  putStrLn "altered (Prelude): " >> print (True Prelude.<$ original)
 
 data MyBox a = MyBox a
   deriving (Show, Eq)
