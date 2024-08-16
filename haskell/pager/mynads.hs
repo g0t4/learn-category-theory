@@ -28,8 +28,15 @@ instance MyFunbags MyThisOrThat where
 
 -- use a list as a "container"... and only allow first item to be a thing
 instance MyFunbags [] where
+  -- PRN reimpl using all items in list like std library does. That said I think it's interesting to change how the container behaves too!
   fmapMy func [] = []
   fmapMy func (head : _) = [func head] -- destructure to get the first item (only one allowed in this "container" I defined)
+
+testLessDollar = do
+  let original = [1, 2, 3]
+  putStrLn "original: " >> print original
+  let altered = True Main.<$ original
+  putStrLn "altered: " >> print altered
 
 data MyBox a = MyBox a
   deriving (Show, Eq)
