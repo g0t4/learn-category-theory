@@ -22,9 +22,8 @@ runHCat = do
  where
   happyPath =
     do
-      args <- getArgs :: IO [String]
-      parseArgs args
-      >>= TextIO.readFile
+      fileName <- parseArgs =<< (getArgs :: IO [String])
+      TextIO.readFile fileName
       >>= TextIO.putStrLn
   sadPath = print @IOError
 
