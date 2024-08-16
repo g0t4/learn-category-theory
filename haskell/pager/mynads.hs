@@ -17,3 +17,18 @@ class MyFunctor f where
   infixl 4 <$>
   (<$>) :: (Functor f) => (a -> b) -> f a -> f b
   (<$>) = fmapMy
+
+data MyThisOrThat a = MyThis a | MyThat a -- must have a type parameter to use it as a functor (which requires a type parameter)
+  deriving (Show, Eq)
+
+instance MyFunctor MyThisOrThat where
+  fmapMy func (MyThis a) = MyThis (func a)
+  fmapMy func (MyThat a) = MyThat (func a)
+
+testMyFunctorThisThat = do
+  let first = MyThis 1
+  let second = MyThat 2
+
+  print $ fmapMy id first
+  print $ fmapMy (* 8) first
+  print $ fmapMy (* 8) second
