@@ -22,7 +22,7 @@ runHCat = do
  where
   happyPath =
     do
-      -- =<< ~=   `flip . >>=` for do blocks <- only
+      -- FYI `=<<` ~= `flip . >>=` for do blocks after `<-` ... USE this if NOT WANT intermediate variables for each step, cool... do blocks are flexible
       TextIO.putStrLn =<< TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
   sadPath = print @IOError
 
