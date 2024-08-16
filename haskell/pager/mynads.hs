@@ -127,7 +127,7 @@ testNadChains2 = do
   --
   unwrapped4 <- (\unwrapd -> wrap (unwrapd <> "spit")) =<< MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   unwrapped4b <- wrap . ("4b - spit" <>) =<< MyBox "head" -- I dislike wrapping here, so when I wanna work with unwrapped value w/o rewrapping then use fmap/<$>
-  unwrapped4c <- wrap <$> ("4b - spit" <>) =<< MyBox "head" -- fmap == . (composition)
+  unwrapped4c <- wrap <$> ("4b - spit" <>) =<< MyBox "head" -- !!!     fmap == . (composition)
   --
   unwrapped5 <- (\unwrapd -> unwrapd <> "spit") `fmapMy` MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   -- FYI can overwrite the bind var (unwrapped5) here and that makes sense as you can do that in a nested lambda too
