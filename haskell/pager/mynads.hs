@@ -25,10 +25,21 @@ instance MyFunctor MyThisOrThat where
   fmapMy func (MyThis a) = MyThis (func a)
   fmapMy func (MyThat a) = MyThat (func a)
 
+-- use a list as a container? and only allow first item to be a thing
+instance MyFunctor [] where
+  fmapMy func [] = []
+  fmapMy func (head : _) = [func head]
+
 testMyFunctorThisThat = do
   let first = MyThis 1
   let second = MyThat 2
 
-  print $ fmapMy id first
+  -- print $ fmapMy id first
   print $ fmapMy (* 8) first
   print $ fmapMy (* 8) second
+
+  let wrappedInt = [1]
+  -- print $ fmapMy id wrappedInt
+  print $ fmapMy (/ 2) wrappedInt
+  print $ fmapMy (/ 2) [10]
+  print $ (/ 2) `fmapMy` [10]
