@@ -115,13 +115,14 @@ testNadChains2 = do
   -- unwrapped 3
   unwrapped3 <- MyBox "bull" >>= (\unwrapd -> wrap (unwrapd <> "spit"))
   unwrapped4 <- (\unwrapd -> wrap (unwrapd <> "spit")) =<< MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
+  unwrapped5 <- (\unwrapd -> unwrapd <> "spit") `fmapMy` MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
 
   -- unwrapped2
   unwrapped2 <- MyBox "fudge"
   let foo2 = unwrapped2 <> "pole" -- string ops!
 
   -- return wrapped
-  let all = [unwrapped1, foo2, unwrapped3, unwrapped4]
+  let all = [unwrapped1, foo2, unwrapped3, unwrapped4, unwrapped5]
   wrap (foldl1 (\a b -> a <> ", " <> b) all)
 
 class (MyNads f) => MyApphole f where
