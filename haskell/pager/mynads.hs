@@ -116,8 +116,9 @@ instance Applicative MyBox where
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
-  face <- MyBox "duck"
-  wrap face
+  unwrapped <- MyBox "fudge"
+  let foo = unwrapped <> "pole"
+  wrap foo
 
 class (MyNads f) => MyApphole f where
   -- hold your tongue and say My Apple
