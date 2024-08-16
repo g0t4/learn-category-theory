@@ -56,5 +56,8 @@ testMyBox = do
   print $ fmapMy (<> "bar") box2
   print $ fmapMy (+ 10) box1
 
+  -- change type of contents ... Int => Tuple(Int,Int)
+  print $ fmapMy (\a -> (a, a + 1)) box1
+
 -- MyFunctor is a wrapper that provides the methods that can be chained to manipulate the contents.. and always stay in the paradigm of the wrapper and fmap means you can pass functions in terms of  the type of the contents and never need to worry about unwrap (destructure) and wrap (return) before nor after the operation.
 -- in many ways you can think of these containers as mixins that extend the behavior of a type without touching the type itself...
