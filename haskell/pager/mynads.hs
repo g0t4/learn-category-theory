@@ -22,19 +22,19 @@ data MyThisOrThat a = MyThis a | MyThat a -- must have a type parameter to use i
   deriving (Show, Eq)
 
 instance MyFunctor MyThisOrThat where
-  fmapMy func (MyThis a) = MyThis (func a)
-  fmapMy func (MyThat a) = MyThat (func a)
+  fmapMy func (MyThis a) = MyThis (func a) -- destructuring is how you unwrap
+  fmapMy func (MyThat a) = MyThat (func a) -- destructuring is how you unwrap
 
 -- use a list as a "container"... and only allow first item to be a thing
 instance MyFunctor [] where
   fmapMy func [] = []
-  fmapMy func (head : _) = [func head]
+  fmapMy func (head : _) = [func head] -- destructure to get the first item (only one allowed in this "container" I defined)
 
 data MyBox a = MyBox a
   deriving (Show, Eq)
 
 instance MyFunctor MyBox where
-  fmapMy func (MyBox a) = MyBox (func a)
+  fmapMy func (MyBox a) = MyBox (func a) -- destructuring == unwrap
 
 testMyFunctorThisThat = do
   let first = MyThis 1
