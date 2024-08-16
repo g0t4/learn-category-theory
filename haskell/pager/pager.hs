@@ -20,11 +20,51 @@ main =
 runHCat = do
   Exception.catch happyPath (putStrLnRed . show @IOError) -- @IOError is a type hint to inference
  where
+  sadPath = print @IOError
   happyPath =
+    do
+      -- ALSO, even if not chained w/ >>=... do block still ensures each top level do statement is evaluated (for side effects), hence this works to double the file with two diff styles:
+      happy1single
+      happy1split
+      happy2single
+      happy2split
+      happy3mix
+      happy4allIntermediate
+      happy5combined
+  happy5combined =
+    do
+      fileName <- parseArgs =<< getArgs
+      TextIO.putStrLn =<< TextIO.readFile fileName
+  happy4allIntermediate =
+    do
+      args <- getArgs
+      fileName <- parseArgs args
+      contents <- TextIO.readFile fileName
+      TextIO.putStrLn contents
+  happy3mix =
+    do
+      args <- getArgs
+      parseArgs args
+      >>= TextIO.readFile
+      >>= TextIO.putStrLn
+  happy1split =
+    do
+      getArgs
+      >>= parseArgs
+      >>= TextIO.readFile
+      >>= TextIO.putStrLn
+  happy1single =
+    getArgs >>= parseArgs >>= TextIO.readFile >>= TextIO.putStrLn
+  happy2single =
     do
       -- FYI `=<<` ~= `flip . >>=` for do blocks after `<-` ... USE this if NOT WANT intermediate variables for each step, cool... do blocks are flexible
       TextIO.putStrLn =<< TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
-  sadPath = print @IOError
+  happy2split =
+    do
+      TextIO.putStrLn
+        =<< TextIO.readFile
+        =<< parseArgs
+        =<< (getArgs :: IO [String])
 
 resetColor = "\x1b[0m"
 colorText color text = color ++ text ++ resetColor
