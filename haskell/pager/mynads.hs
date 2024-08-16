@@ -61,3 +61,28 @@ testMyBox = do
 
 -- MyFunctor is a wrapper that provides the methods that can be chained to manipulate the contents.. and always stay in the paradigm of the wrapper and fmap means you can pass functions in terms of  the type of the contents and never need to worry about unwrap (destructure) and wrap (return) before nor after the operation.
 -- in many ways you can think of these containers as mixins that extend the behavior of a type without touching the type itself...
+
+-- TODO depend on and use Functor's fmapMy
+class MyNads m where
+  -- instances have to define wrapping (data type ctor)
+  wrap :: a -> m a -- aka return
+
+  return :: a -> m a
+  return = wrap
+
+  -- instances have to define unwrapping (i.e. w/ destruct pattern matching)
+  bind :: (a -> b) -> m a -> m b
+
+  -- alias
+  (>>=) :: (a -> b) -> m a -> m b
+  (>>=) = bind
+
+instance MyNads MyBox where
+  wrap a = MyBox a
+
+  bind func (MyBox a) = wrap (func a)
+
+testMyNads = do
+  let surprise = MyBox "backdoor"
+  let answer = fmapMy ("likes it in the " <>) surprise
+  print answer
