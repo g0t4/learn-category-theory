@@ -36,10 +36,11 @@ testLessDollar = do
   let original = [1, 2, 3]
   putStrLn "original: " >> print original
   -- use <$ operator
-  putStrLn "altered: " >> print (True Main.<$ original)
-  putStrLn "altered (Prelude): " >> print (True Prelude.<$ original)
+  putStrLn "altered: " >> print (True Main.<$ original) -- [True]
+  putStrLn "altered (Prelude): " >> print (True Prelude.<$ original) -- [True,True,True] -- instance Monad [] works on all items in array (like a set of item as the type arg)
 
 data MyBox a = MyBox a
+  -- FYI use:  ghci -e ":instances MyBox" -- to see all instances for this type
   deriving (Show, Eq)
 
 instance MyFunbags MyBox where
