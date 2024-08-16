@@ -1,4 +1,4 @@
-import GHC.Base
+import GHC.Base (when)
 
 testConditionalPrint = do
   when True (print "when true")
@@ -12,11 +12,12 @@ class MyFunbags f where
   fmapMy :: (a -> b) -> f a -> f b
   (<$) :: a -> f b -> f a
   (<$) a fb = fmapMy (const a) fb -- IOTW use fmapMy to take `a` and return `f a`, that is all that we are doing here, reusing fmapMy, ignore any b value passed... SO this is `return`/`pure` (think "wrap")?
-
-  -- alias fmap to <$>
-  infixl 4 <$>
-  (<$>) :: (Functor f) => (a -> b) -> f a -> f b
-  (<$>) = fmapMy
+  --
+  -- let my impl of Functor down below provide this and it does it via fmapMy anyways, so no need to reimpl here:
+  -- -- alias fmap to <$>
+  -- infixl 4 <$>
+  -- (<$>) :: (Functor f) => (a -> b) -> f a -> f b
+  -- (<$>) = fmapMy
 
 data MyThisOrThat a = MyThis a | MyThat a -- must have a type parameter to use it as a functor (which requires a type parameter)
   deriving (Show, Eq)
@@ -116,6 +117,7 @@ testNadChains2 = do
   unwrapped3 <- MyBox "bull" >>= (\unwrapd -> wrap (unwrapd <> "spit"))
   unwrapped4 <- (\unwrapd -> wrap (unwrapd <> "spit")) =<< MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   unwrapped5 <- (\unwrapd -> unwrapd <> "spit") `fmapMy` MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
+  unwrapped5 <- (\unwrapd -> unwrapd <> "spit") <$> MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
 
   -- unwrapped2
   unwrapped2 <- MyBox "fudge"
