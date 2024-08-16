@@ -96,3 +96,7 @@ testMyNads2 = do
 testChains :: IO ()
 testChains = do
   print "duck face"
+
+testNadChains :: MyBox String
+testNadChains = do
+  MyBox "duck face"
