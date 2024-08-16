@@ -22,8 +22,8 @@ runHCat = do
  where
   happyPath =
     do
-      args <- getArgs -- FYI `<-` unwraps IO [String] into just [String], just like the actual bind function does, so that means cannot use bind >>= on the result
-      parseArgs args
+      getArgs
+      >>= parseArgs
       >>= TextIO.readFile
       >>= TextIO.putStrLn
   sadPath = print @IOError
