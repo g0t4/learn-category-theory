@@ -112,9 +112,22 @@ instance Functor MyBox where
 
 instance Applicative MyBox where
   pure = wrap
-  liftA2 func (MyBox a) (MyBox b) = wrap (func a b)
+  liftA2 = myliftA2
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
   face <- MyBox "duck"
   wrap face
+
+class (MyNads f) => MyApphole f where
+  -- hold your tongue and say My Apple
+
+  -- TODO what is the hieararchy of Monad/Applicative/Functor?
+  pure :: a -> f a
+  pure = wrap
+
+  -- leave up to impls ... -- TODO review what I make instances impl and see if I can simplify anything without obscuring things
+  myliftA2 :: (a -> b -> c) -> f a -> f b -> f c
+
+instance MyApphole MyBox where
+  myliftA2 func (MyBox a) (MyBox b) = wrap (func a b)
