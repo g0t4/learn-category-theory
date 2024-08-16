@@ -57,8 +57,9 @@ runHCat = do
     getArgs >>= parseArgs >>= TextIO.readFile >>= TextIO.putStrLn
   happy2single =
     do
-      -- FYI `=<<` ~= `flip . >>=` for do blocks after `<-` ... USE this if NOT WANT intermediate variables for each step, cool... do blocks are flexible
       TextIO.putStrLn =<< TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
+  -- FYI `=<<` ~= `flip . >>=` for do blocks after `<-` ... USE this if NOT WANT intermediate variables for each step, cool... do blocks are flexible
+  -- https://github.com/g0t4/learn-category-theory/blob/1eb2fdf6eee7161e56a98ca2da0ebb4bb15b68ed/haskell/pager/pager.hs#L33
   happy2split =
     do
       TextIO.putStrLn
