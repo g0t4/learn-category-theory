@@ -99,14 +99,14 @@ testNadChains = do
 
 -- USING my IMPLs of everything instead of re-impling (i.e. MyFunctor.fmapMy, MyNads.wrap - EXCEPT for liftA2 as I don't have a MyApplicative yet)
 instance Monad MyBox where
-  (>>=) = bind
+  (>>=) = bind -- MyNads
 
 instance Functor MyBox where
-  fmap = fmapMy
+  fmap = fmapMy -- from MyFunbags
 
 instance Applicative MyBox where
-  pure = wrap
-  liftA2 = myliftA2
+  pure = wrap -- from MyNads
+  liftA2 = myliftA2 -- from MyApphole
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
