@@ -99,7 +99,7 @@ testNadChains = do
 
 -- USING my IMPLs of everything instead of re-impling (i.e. MyFunctor.fmapMy, MyNads.wrap - EXCEPT for liftA2 as I don't have a MyApplicative yet)
 instance Monad MyBox where
-  (>>=) (MyBox a) func = func a -- TODO impl this with MyNads
+  (>>=) = bind
 
 instance Functor MyBox where
   fmap = fmapMy
