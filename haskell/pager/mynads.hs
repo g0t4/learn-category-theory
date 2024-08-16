@@ -116,7 +116,7 @@ instance Functor MyBox where
 
 instance Applicative MyBox where
   pure = wrap -- from MyNads
-  liftA2 = myliftA2 -- from MyApphole
+  liftA2 = myliftA2 -- from MyApphole (FYI liftA2 or <*> need to be defined for Applicative)
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
