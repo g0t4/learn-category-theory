@@ -84,5 +84,5 @@ instance MyNads MyBox where
 
 testMyNads = do
   let surprise = MyBox "backdoor"
-  let answer = fmapMy ("likes it in the " <>) surprise
+  let answer = fmapMy (<> "likes it in the") surprise
   print answer
