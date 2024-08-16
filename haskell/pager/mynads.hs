@@ -11,7 +11,7 @@ testConditionalPrint = do
 class MyFunctor f where
   fmapMy :: (a -> b) -> f a -> f b
   (<$) :: a -> f b -> f a
-  (<$) a fb = fmapMy (const a) fb
+  (<$) a fb = fmapMy (const a) fb -- IOTW use fmapMy to take `a` and return `f a`, that is all that we are doing here, reusing fmapMy, ignore any b value passed... SO this is `return`/`pure` (think "wrap")?
 
   -- alias fmap to <$>
   infixl 4 <$>
