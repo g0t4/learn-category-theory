@@ -68,12 +68,12 @@ class MyNads m where
   wrap :: a -> m a -- aka return
 
   -- instances have to define unwrapping (i.e. w/ destruct pattern matching)
-  bind :: m a -> (a -> b) -> m b
+  bind :: m a -> (a -> m b) -> m b
 
 instance MyNads MyBox where
   wrap a = MyBox a
 
-  bind (MyBox a) func = wrap (func a)
+  bind (MyBox a) func = func a
 
 testMyNads = do
   let surprise = MyBox "backdoor"
@@ -82,8 +82,8 @@ testMyNads = do
 
 testMyNads2 = do
   let surprise = wrap "otherdoor" :: MyBox String
-  let tellMe = bind surprise ("likes it in the " <>)
-  let tellMe2 = surprise `bind` ("likes it in the " <>)
+  let tellMe = bind surprise (wrap . ("likes it in the " <>))
+  let tellMe2 = surprise `bind` (wrap . ("likes it in the " <>))
   -- b/c show is impl'd on the type param I can use bind in place of fmap and pass to print and have no difference
   print tellMe
 
@@ -99,7 +99,7 @@ testNadChains = do
 
 -- USING my IMPLs of everything instead of re-impling (i.e. MyFunctor.fmapMy, MyNads.wrap - EXCEPT for liftA2 as I don't have a MyApplicative yet)
 instance Monad MyBox where
-  (>>=) (MyBox a) func = func a
+  (>>=) (MyBox a) func = func a -- TODO impl this with MyNads
 
 instance Functor MyBox where
   fmap = fmapMy
@@ -110,10 +110,10 @@ instance Applicative MyBox where
 
 testNadChains2 :: MyBox String
 testNadChains2 = do
-  unwrapped1 <- MyBox "bull" `bind` (\unwrapd -> unwrapd <> "spit") -- explicit lambda to make clear what is happening
+  unwrapped1 <- MyBox "bull" `bind` (\unwrapd -> wrap (unwrapd <> "spit")) -- explicit lambda to make clear what is happening
 
   -- unwrapped 3
-  unwrapped3 <- MyBox "bull" `bind` (\unwrapd -> unwrapd <> "spit")
+  unwrapped3 <- MyBox "bull" `bind` (\unwrapd -> wrap (unwrapd <> "spit"))
 
   -- unwrapped2
   unwrapped2 <- MyBox "fudge"
