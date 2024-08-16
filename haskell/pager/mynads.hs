@@ -120,7 +120,7 @@ testNadChains2 = do
   -- FYI can overwrite the bind var (unwrapped5) here and that makes sense as you can do that in a nested lambda too
   unwrapped5 <- (\unwrapd -> unwrapd <> "spits") <$> MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   unwrapped6 <- (<> "spits") <$> MyBox "bull"
-  unwrapped6 <- ("spits" <>) <$> MyBox "bull" -- more readable, esp b/c <$> looks likes $ and reads the same here
+  unwrapped6 <- ("spits" <>) <$> MyBox "bull" -- more readable, esp b/c <$> looks likes $ and reads the same here -- I REALLY LIKE THIS FORM as if you squint it looks alot like:  "spits" <> $ "bull"  => "spits" <> "bull"
 
   -- unwrapped2
   unwrapped2 <- MyBox "fudge"
