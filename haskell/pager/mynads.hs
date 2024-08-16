@@ -25,10 +25,16 @@ instance MyFunctor MyThisOrThat where
   fmapMy func (MyThis a) = MyThis (func a)
   fmapMy func (MyThat a) = MyThat (func a)
 
--- use a list as a container? and only allow first item to be a thing
+-- use a list as a "container"... and only allow first item to be a thing
 instance MyFunctor [] where
   fmapMy func [] = []
   fmapMy func (head : _) = [func head]
+
+data MyBox a = MyBox a
+  deriving (Show, Eq)
+
+instance MyFunctor MyBox where
+  fmapMy func (MyBox a) = MyBox (func a)
 
 testMyFunctorThisThat = do
   let first = MyThis 1
@@ -43,3 +49,11 @@ testMyFunctorThisThat = do
   print $ fmapMy (/ 2) wrappedInt
   print $ fmapMy (/ 2) [10]
   print $ (/ 2) `fmapMy` [10]
+
+testMyBox = do
+  let box1 = MyBox 1
+      box2 = MyBox "foo"
+  print $ fmapMy (<> "bar") box2
+  print $ fmapMy (+ 10) box1
+
+-- MyFunctor is a wrapper that provides the methods that can be chained to manipulate the contents.. and always stay in the paradigm of the wrapper and fmap means you can pass functions in terms of  the type of the contents and never need to worry about unwrap (destructure) and wrap (return) before nor after the operation.
