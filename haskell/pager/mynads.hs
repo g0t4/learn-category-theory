@@ -116,6 +116,7 @@ testNadChains2 = do
   -- unwrapped 3
   unwrapped3 <- MyBox "bull" >>= (\unwrapd -> wrap (unwrapd <> "spit"))
   unwrapped4 <- (\unwrapd -> wrap (unwrapd <> "spit")) =<< MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
+  unwrapped4b <- wrap . (<> "spit4b") =<< MyBox "bull"
   unwrapped5 <- (\unwrapd -> unwrapd <> "spit") `fmapMy` MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   -- FYI can overwrite the bind var (unwrapped5) here and that makes sense as you can do that in a nested lambda too
   unwrapped5 <- (\unwrapd -> unwrapd <> "spits") <$> MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
@@ -127,7 +128,7 @@ testNadChains2 = do
   let foo2 = unwrapped2 <> "pole" -- string ops!
 
   -- return wrapped
-  let all = [unwrapped1, foo2, unwrapped3, unwrapped4, unwrapped5]
+  let all = [unwrapped1, foo2, unwrapped4b]
   wrap (foldl1 (\a b -> a <> ", " <> b) all)
 
 class (MyNads f) => MyApphole f where
