@@ -23,8 +23,8 @@ runHCat = do
   happyPath =
     do
       fileName <- parseArgs =<< (getArgs :: IO [String])
-      TextIO.readFile fileName
-      >>= TextIO.putStrLn
+      contents <- TextIO.readFile fileName
+      TextIO.putStrLn contents
   sadPath = print @IOError
 
 resetColor = "\x1b[0m"
