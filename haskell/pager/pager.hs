@@ -23,8 +23,7 @@ runHCat = do
   happyPath =
     do
       -- =<< ~=   `flip . >>=` for do blocks <- only
-      contents <- TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
-      TextIO.putStrLn contents
+      TextIO.putStrLn =<< TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
   sadPath = print @IOError
 
 resetColor = "\x1b[0m"
