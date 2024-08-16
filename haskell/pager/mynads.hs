@@ -8,7 +8,7 @@ testConditionalPrint = do
 -- Functor is a thing that can apply a function to a context? IOTW it wouldn't have the function, nor the instance... so it would take both of those as parameters (i.e. bind, fmap)
 --
 
-class MyFunctor f where
+class MyFunbags f where
   fmapMy :: (a -> b) -> f a -> f b
   (<$) :: a -> f b -> f a
   (<$) a fb = fmapMy (const a) fb -- IOTW use fmapMy to take `a` and return `f a`, that is all that we are doing here, reusing fmapMy, ignore any b value passed... SO this is `return`/`pure` (think "wrap")?
@@ -21,19 +21,19 @@ class MyFunctor f where
 data MyThisOrThat a = MyThis a | MyThat a -- must have a type parameter to use it as a functor (which requires a type parameter)
   deriving (Show, Eq)
 
-instance MyFunctor MyThisOrThat where
+instance MyFunbags MyThisOrThat where
   fmapMy func (MyThis a) = MyThis (func a) -- destructuring is how you unwrap
   fmapMy func (MyThat a) = MyThat (func a) -- destructuring is how you unwrap
 
 -- use a list as a "container"... and only allow first item to be a thing
-instance MyFunctor [] where
+instance MyFunbags [] where
   fmapMy func [] = []
   fmapMy func (head : _) = [func head] -- destructure to get the first item (only one allowed in this "container" I defined)
 
 data MyBox a = MyBox a
   deriving (Show, Eq)
 
-instance MyFunctor MyBox where
+instance MyFunbags MyBox where
   fmapMy func (MyBox a) = MyBox (func a) -- destructuring == unwrap
 
 testMyFunctorThisThat = do
@@ -100,3 +100,21 @@ testChains = do
 testNadChains :: MyBox String
 testNadChains = do
   MyBox "duck face"
+
+-- *** wire up MyNads/MyFunctor impls to actual Monad/Functor/Applicative types for do block  (UNLESS, can I use my own Monad type with a do block?)
+
+-- USING my IMPLs of everything instead of re-impling (i.e. MyFunctor.fmapMy, MyNads.wrap - EXCEPT for liftA2 as I don't have a MyApplicative yet)
+instance Monad MyBox where
+  (>>=) (MyBox a) func = func a
+
+instance Functor MyBox where
+  fmap = fmapMy
+
+instance Applicative MyBox where
+  pure = wrap
+  liftA2 func (MyBox a) (MyBox b) = wrap (func a b)
+
+testNadChains2 :: MyBox String
+testNadChains2 = do
+  face <- MyBox "duck"
+  wrap face
