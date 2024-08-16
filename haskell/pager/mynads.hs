@@ -35,7 +35,7 @@ instance MyFunbags [] where
 testLessDollarReplace = do
   let original = [1, 2, 3]
   putStrLn "original: " >> print original
-  -- use <$ operator
+  -- use <$ operator (aka REPLACE)
   putStrLn "altered: " >> print (True Main.<$ original) -- [True]
   putStrLn "altered (Prelude): " >> print (True Prelude.<$ original) -- [True,True,True] -- instance Monad [] works on all items in array (like a set of item as the type arg)
 
@@ -124,8 +124,11 @@ testNadChains2 = do
 
   -- unwrapped 3
   unwrapped3 <- MyBox "bull" >>= (\unwrapd -> wrap (unwrapd <> "spit"))
+  --
   unwrapped4 <- (\unwrapd -> wrap (unwrapd <> "spit")) =<< MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   unwrapped4b <- wrap . ("4b - spit" <>) =<< MyBox "head" -- I dislike wrapping here, so when I wanna work with unwrapped value w/o rewrapping then use fmap/<$>
+  unwrapped4c <- wrap <$> ("4b - spit" <>) =<< MyBox "head" -- fmap == . (composition)
+  --
   unwrapped5 <- (\unwrapd -> unwrapd <> "spit") `fmapMy` MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
   -- FYI can overwrite the bind var (unwrapped5) here and that makes sense as you can do that in a nested lambda too
   unwrapped5 <- (\unwrapd -> unwrapd <> "spits") <$> MyBox "bull" -- FINALLY, this is what I wanted to write way before I realized I F'd up bind on MyNads
