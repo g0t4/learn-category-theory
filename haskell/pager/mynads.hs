@@ -84,5 +84,10 @@ instance MyNads MyBox where
 
 testMyNads = do
   let surprise = MyBox "backdoor"
-  let answer = fmapMy (<> "likes it in the") surprise
-  print answer
+  let tellMe = fmapMy ("likes it in the " <>) surprise
+  print tellMe
+
+testMyNads2 = do
+  let surprise = wrap "backdoor" :: MyBox String
+  let tellMe = bind ("likes it in the " <>) surprise
+  print tellMe
