@@ -32,7 +32,7 @@ instance MyFunbags [] where
   fmapMy func [] = []
   fmapMy func (head : _) = [func head] -- destructure to get the first item (only one allowed in this "container" I defined)
 
-testLessDollar = do
+testLessDollarReplace = do
   let original = [1, 2, 3]
   putStrLn "original: " >> print original
   -- use <$ operator
