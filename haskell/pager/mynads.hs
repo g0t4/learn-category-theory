@@ -92,3 +92,7 @@ testMyNads2 = do
   let tellMe = bind ("likes it in the " <>) surprise
   -- b/c show is impl'd on the type param I can use bind in place of fmap and pass to print and have no difference
   print tellMe
+
+testChains :: IO ()
+testChains = do
+  print "duck face"
