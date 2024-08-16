@@ -22,8 +22,8 @@ runHCat = do
  where
   happyPath =
     do
-      fileName <- parseArgs =<< (getArgs :: IO [String])
-      contents <- TextIO.readFile fileName
+      -- =<< ~=   `flip . >>=` for do blocks <- only
+      contents <- TextIO.readFile =<< parseArgs =<< (getArgs :: IO [String])
       TextIO.putStrLn contents
   sadPath = print @IOError
 
