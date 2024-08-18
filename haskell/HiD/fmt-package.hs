@@ -17,3 +17,6 @@ testFormatting =
 testBasic =
   let name = "Alice" :: String
    in "Meet " +| name |+ "!" :: String
+testBasicText =
+  let name = "Alice" :: Text
+   in "Meet " +| name |+ "!" :: Text -- IIUC the desired type forces the builder to produce it, i.e. build a Text response (vs String above)
