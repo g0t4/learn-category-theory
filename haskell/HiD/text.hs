@@ -21,7 +21,7 @@ myDropWhen func (head : rest)
 testDropAround = do
   print $ myDropWhen isLetter "foo-the-bar"
   print $ myDropWhen (not . isLetter) "foo-the-bar"
-  print $ dropAround isLetter (pack "foo-the-bar") -- behaves diff than I expected
+  print $ dropAround isLetter (pack "foo-the-bar") -- => "-the-" dropAroundUntil is how this works
   -- dropAround is very much like a trim but with any char predicates
   let trim = dropAround isSpace
   print $ trim (pack "  foo the bar     ")
