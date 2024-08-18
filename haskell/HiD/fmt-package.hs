@@ -1,10 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Fmt
+import Fmt -- redundnat b/c in .cabal file too
 
 testFormatting = do
   let name = "foo"
       last_name = "bar"
       age = 100
 
-  fmt $ "name: " +| name |+ ", last: " +| last_name |+ ""
+  print "foo"
+
+-- cabal repl -- b/c this deps on Fmt
