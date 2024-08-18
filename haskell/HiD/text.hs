@@ -1,5 +1,6 @@
 -- while working through Haskell in Depth book (manning)
 import Data.Char (isLetter)
+import Data.Text (dropAround, pack)
 
 myTakeWhile :: (a -> Bool) -> [a] -> [a]
 myTakeWhile _ [] = []
@@ -10,12 +11,14 @@ myTakeWhile func (head : rest)
 testTakeWhile = do
   print $ myTakeWhile isLetter "foo-the-bar"
 
-myDropAround :: (a -> Bool) -> [a] -> [a]
-myDropAround _ [] = []
-myDropAround func (head : rest)
-  | func head = myDropAround func rest -- drop if match predicate? IncoherentInstances
-  | otherwise = head : myDropAround func rest
+myDropWhen :: (a -> Bool) -> [a] -> [a]
+myDropWhen _ [] = []
+myDropWhen func (head : rest)
+  -- THis is more like drop when? dropAround behaves different (seems to keep until first match and then do the same from end foward until first match?)
+  | func head = myDropWhen func rest -- drop if match predicate? IncoherentInstances
+  | otherwise = head : myDropWhen func rest
 
 testDropAround = do
-  print $ myDropAround isLetter "foo-the-bar"
-  print $ myDropAround (not . isLetter) "foo-the-bar"
+  print $ myDropWhen isLetter "foo-the-bar"
+  print $ myDropWhen (not . isLetter) "foo-the-bar"
+  print $ dropAround isLetter (pack "foo-the-bar") -- behaves diff than I expected
