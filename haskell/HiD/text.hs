@@ -1,5 +1,5 @@
 -- while working through Haskell in Depth book (manning)
-import Data.Char (isLetter)
+import Data.Char (isLetter, isSpace)
 import Data.Text (dropAround, pack)
 
 myTakeWhile :: (a -> Bool) -> [a] -> [a]
@@ -22,3 +22,6 @@ testDropAround = do
   print $ myDropWhen isLetter "foo-the-bar"
   print $ myDropWhen (not . isLetter) "foo-the-bar"
   print $ dropAround isLetter (pack "foo-the-bar") -- behaves diff than I expected
+  -- dropAround is very much like a trim but with any char predicates
+  let trim = dropAround isSpace
+  print $ trim (pack "  foo the bar     ")
