@@ -15,6 +15,6 @@ executable HiD
     -- other-extensions:
     build-depends:    
             base ^>=4.18.2.0
-            , fmt
+            , fmt, text
     hs-source-dirs:   .
     default-language: Haskell2010
