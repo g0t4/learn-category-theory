@@ -8,6 +8,7 @@ testConditionalPrint = do
 -- Functor is a thing that can apply a function to a context? IOTW it wouldn't have the function, nor the instance... so it would take both of those as parameters (i.e. bind, fmap)
 --
 
+-- FYI fmap is the same as bind except the applied func doesn't return a wrapped value... so fmap effectively unwraps a (input) and wraps b (output), whereas bind only unwraps a (input) b/c it expects the func to wrap b...
 class MyFunbags f where
   fmapMy :: (a -> b) -> f a -> f b
   (<$) :: a -> f b -> f a
