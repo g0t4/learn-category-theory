@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 import Data.Text (Text)
-import Fmt
+import Fmt -- https://hackage.haskell.org/package/fmt-0.6.3.0/docs/Fmt.html
 
 testFormatting :: Text
 testFormatting =
@@ -20,3 +20,8 @@ testBasic =
 testBasicText =
   let name = "Alice" :: Text
    in "Meet " +| name |+ "!" :: Text -- IIUC the desired type forces the builder to produce it, i.e. build a Text response (vs String above)
+
+testTupleFormatter :: Text -- also need to specify output constraint or builder is ambiguous
+testTupleFormatter =
+  let pos = (3 :: Int, 5 :: Int) -- must specify types b/c lazy eval won't find appropriate constraints
+   in "Character's position: " +| tupleF pos |+ ""
