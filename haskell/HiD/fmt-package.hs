@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-} -- treat Strings as Text (akin to have called pack on them)
 
 import Data.Text (Text)
 import Fmt -- https://hackage.haskell.org/package/fmt-0.6.3.0/docs/Fmt.html
